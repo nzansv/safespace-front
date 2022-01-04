@@ -26,6 +26,8 @@ import { MatSelectChange } from '@angular/material/select';
 import icPhone from '@iconify/icons-ic/twotone-phone';
 import icMail from '@iconify/icons-ic/twotone-mail';
 import icMap from '@iconify/icons-ic/twotone-map';
+import {UserService} from '../../../core/service/user.service';
+import {User} from '../../../core/model/user';
 
 
 @UntilDestroy()
@@ -58,26 +60,13 @@ export class AioTableComponent implements OnInit, AfterViewInit {
   data$: Observable<Customer[]> = this.subject$.asObservable();
   customers: Customer[];
 
-  @Input()
-  columns: TableColumn<Customer>[] = [
-    { label: 'Name', property: 'name', type: 'text', visible: true, cssClasses: ['font-medium'] },
-    { label: 'First Name', property: 'firstName', type: 'text', visible: false },
-    { label: 'Last Name', property: 'lastName', type: 'text', visible: false },
-    { label: 'Department', property: 'department', type: 'text', visible: true },
-    { label: 'Covid Status', property: 'covid', type: 'text', visible: true },
-    { label: 'Risk Status', property: 'risk', type: 'text', visible: true },
-    { label: 'Address', property: 'address', type: 'text', visible: true, cssClasses: ['text-secondary', 'font-medium'] },
-    { label: 'Street', property: 'street', type: 'text', visible: false, cssClasses: ['text-secondary', 'font-medium'] },
-    { label: 'Zipcode', property: 'zipcode', type: 'text', visible: false, cssClasses: ['text-secondary', 'font-medium'] },
-    { label: 'City', property: 'city', type: 'text', visible: false, cssClasses: ['text-secondary', 'font-medium'] },
-    { label: 'Phone', property: 'phoneNumber', type: 'text', visible: true, cssClasses: ['text-secondary', 'font-medium'] },
-    { label: 'Actions', property: 'actions', type: 'button', visible: true }
-  ];
+  displayedColumns: string[] = ['name', 'email', 'position', 'phoneNumber', 'riskStatus', 'covidStatus', 'actions'];
+
   pageSize = 10;
+  page = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  dataSource: MatTableDataSource<Customer> | null;
+  dataSource: MatTableDataSource<User> | null;
   selection = new SelectionModel<Customer>(true, []);
-  searchCtrl = new FormControl();
 
   labels = aioTableLabels;
 
@@ -95,11 +84,7 @@ export class AioTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {
-  }
-
-  get visibleColumns() {
-    return this.columns.filter(column => column.visible).map(column => column.property);
+  constructor(private dialog: MatDialog, private userService: UserService) {
   }
 
   /**
@@ -110,23 +95,22 @@ export class AioTableComponent implements OnInit, AfterViewInit {
     return of(aioTableData.map(customer => new Customer(customer)));
   }
 
-  ngOnInit() {
-    this.getData().subscribe(customers => {
-      this.subject$.next(customers);
+  getAllUsersContent($event?): void {
+    let param = `page=0&size=20`;
+    if ($event) {
+      param = `page=${$event.pageIndex}&size=${$event.pageSize}`;
+    }
+    this.userService.getUsers(param).subscribe(res => {
+      this.dataSource = res.content;
+
     });
+  }
+
+  ngOnInit() {
 
     this.dataSource = new MatTableDataSource();
 
-    this.data$.pipe(
-      filter<Customer[]>(Boolean)
-    ).subscribe(customers => {
-      this.customers = customers;
-      this.dataSource.data = customers;
-    });
-
-    this.searchCtrl.valueChanges.pipe(
-      untilDestroyed(this)
-    ).subscribe(value => this.onFilterChange(value));
+    this.getAllUsersContent();
   }
 
   ngAfterViewInit() {
@@ -208,13 +192,13 @@ export class AioTableComponent implements OnInit, AfterViewInit {
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
+  //
+  // /** Selects all rows if they are not all selected; otherwise clear selection. */
+  // masterToggle() {
+  //   this.isAllSelected() ?
+  //     this.selection.clear() :
+  //     this.dataSource.data.forEach(row => this.selection.select(row));
+  // }
 
   trackByProperty<T>(index: number, column: TableColumn<T>) {
     return column.property;
