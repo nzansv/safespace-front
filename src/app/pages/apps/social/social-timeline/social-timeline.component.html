@@ -1,0 +1,33 @@
+<div class="mt-6 flex flex-col md:flex-row md:items-start">
+  <div class="flex-auto">
+    <div class="card">
+      <div class="px-gutter py-4 border-b">
+        <h2 class="title m-0">Edit</h2>
+      </div>
+
+      <div class="px-gutter py-4" gdColumns="1fr 1fr" gdColumns.xs="1fr" gdGap="16px">
+
+
+              <mat-form-field>
+                <mat-label>Phone number</mat-label>
+                <input matInput required>
+              </mat-form-field>
+
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Email</mat-label>
+                  <input matInput>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Password</mat-label>
+                  <input matInput required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                <button color="primary" mat-raised-button type="button">SUBMIT</button>
+              </div>
+
+      </div>
+    </div>
+  </div>
+</div>
