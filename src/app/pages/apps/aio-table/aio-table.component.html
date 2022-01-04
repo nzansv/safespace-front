@@ -26,7 +26,7 @@
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}}</td>
         </ng-container>
 
         <ng-container matColumnDef="email">
@@ -46,12 +46,35 @@
 
         <ng-container matColumnDef="riskStatus">
           <th mat-header-cell *matHeaderCellDef>Risk Status</th>
-          <td mat-cell *matCellDef="let element"> {{element.riskStatus}} </td>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.riskStatus == 'GREEN'" class="status-box-success">
+              <p>{{element.riskStatus}}</p>
+            </div>
+
+            <div *ngIf="element.riskStatus == 'YELLOW'" class="status-box-warn">
+              <p>{{element.riskStatus}}</p>
+            </div>
+
+            <div *ngIf="element.riskStatus == 'RED'" class="status-box-dang">
+              <p>{{element.riskStatus}}</p>
+            </div>
         </ng-container>
 
         <ng-container matColumnDef="covidStatus">
           <th mat-header-cell *matHeaderCellDef>Covid Status</th>
-          <td mat-cell *matCellDef="let element"> {{element.covidStatus}} </td>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.covidStatus == 'GREEN'" class="status-box-success">
+              <p>{{element.covidStatus}}</p>
+            </div>
+
+            <div *ngIf="element.covidStatus == 'BLUE'" class="status-box-info">
+              <p>{{element.covidStatus}}</p>
+            </div>
+
+            <div *ngIf="element.covidStatus == 'RED'" class="status-box-dang">
+              <p>{{element.covidStatus}}</p>
+            </div>
+          </td>
         </ng-container>
 
         <!-- Action Column -->

@@ -56,8 +56,7 @@ export class AioTableComponent implements OnInit{
   pageSize = 10;
   page = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  dataSource: User[] | null;
-  selection = new SelectionModel<Customer>(true, []);
+  dataSource: any[];
 
   labels = aioTableLabels;
 
@@ -83,8 +82,7 @@ export class AioTableComponent implements OnInit{
       param = `page=${$event.pageIndex}&size=${$event.pageSize}`;
     }
     this.userService.getUsers(param).subscribe(res => {
-      this.dataSource = res.content;
-
+      this.dataSource = res;
     });
   }
 
