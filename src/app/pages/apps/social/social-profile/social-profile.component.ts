@@ -14,6 +14,9 @@ import icPhone from '@iconify/icons-ic/twotone-phone';
 import icPersonAdd from '@iconify/icons-ic/twotone-person-add';
 import icCheck from '@iconify/icons-ic/twotone-check';
 import icFolder from '@iconify/icons-ic/twotone-folder';
+import {User} from '../../../../core/model/user';
+import {UserDto} from '../../../../core/model/UserDto';
+import {UserService} from '../../../../core/service/user.service';
 
 @Component({
   selector: 'vex-social-profile',
@@ -29,7 +32,8 @@ import icFolder from '@iconify/icons-ic/twotone-folder';
 export class SocialProfileComponent implements OnInit {
 
   suggestions = friendSuggestions;
-
+  user: User;
+  userDTO: UserDto;
   icWork = icWork;
   icPhone = icPhone;
   icFolder = icFolder;
@@ -39,9 +43,13 @@ export class SocialProfileComponent implements OnInit {
   icAdd = icAdd;
   icWhatshot = icWhatshot;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
+    this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
+      this.user = res;
+    });
   }
 
   addFriend(friend: FriendSuggestion) {

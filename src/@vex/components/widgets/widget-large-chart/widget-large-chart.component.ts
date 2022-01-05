@@ -12,6 +12,7 @@ import { createDateArray } from '../../../utils/create-date-array';
 })
 export class WidgetLargeChartComponent implements OnInit {
   @Input() label: string;
+  @Input() timestamps: number[] = [];
   @Input() series: ApexNonAxisChartSeries | ApexAxisChartSeries;
   @Input() options: ApexOptions = defaultChartOptions({
     grid: {
@@ -40,8 +41,8 @@ export class WidgetLargeChartComponent implements OnInit {
         stops: [0, 90, 100]
       }
     },
-    colors: ['#008ffb', '#ff9800'],
-    labels: createDateArray(12),
+    colors: ['#a20933', '#ff9800', '#22a582'],
+    labels: createDateArray(6),
     xaxis: {
       type: 'datetime',
       labels: {
@@ -61,13 +62,14 @@ export class WidgetLargeChartComponent implements OnInit {
       }
     }
   });
-
   icMoreHoriz = icMoreHoriz;
   icCloudDownload = icCloudDownload;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    this.options.labels = this.timestamps;
   }
 
 }

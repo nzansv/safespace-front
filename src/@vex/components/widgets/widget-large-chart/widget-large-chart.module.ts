@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { IconModule } from '@visurel/iconify-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartModule } from '../../chart/chart.module';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ChartModule } from '../../chart/chart.module';
     MatIconModule,
     MatButtonModule,
     IconModule,
+    MatMenuModule,
     FlexLayoutModule,
     ChartModule
   ],

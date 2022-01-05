@@ -28,11 +28,20 @@ export class DashboardAnalyticsComponent implements OnInit {
   userDTO: UserDto;
   indicators: Indicator[];
   lastIndicator: Indicator;
-
+  timestamps: number[];
+  timestampsMonth: number[];
   userSessionsSeries: ApexAxisChartSeries = [
     {
       name: 'Blood Pressure',
-      data: [10, 50, 26, 50, 38, 60, 50, 25, 61, 80, 40, 60]
+      data: []
+    },
+    {
+      name: 'Heart rate',
+      data: []
+    },
+    {
+      name: 'Temperature',
+      data: []
     }
   ];
   icFavorite = icFavorite;
@@ -49,10 +58,14 @@ export class DashboardAnalyticsComponent implements OnInit {
     });
     this.indocatorService.getIndicatorDetailsById(this.userDTO.id).subscribe(res => {
       this.indicators = res;
-      console.log(this.indicators.map((item) => item.bloodPressure));
       this.indicators = this.indicators.sort(function(x, y) {
         return x.checkTime - y.checkTime;
       });
+      this.userSessionsSeries[0].data = this.indicators.map((item) => item.bloodPressure);
+      this.userSessionsSeries[1].data = this.indicators.map((item) => item.heartRate);
+      this.userSessionsSeries[2].data = this.indicators.map((item) => item.temperature);
+      this.timestamps = this.indicators.map((item) => item.checkTime).slice(-17);
+      this.timestampsMonth = this.indicators.map((item) => item.checkTime).slice(-30);
       for (const i of this.indicators) {
         if (i.isLast === true) {
           this.lastIndicator = i;

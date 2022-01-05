@@ -115,7 +115,7 @@ export class AppComponent {
           label: 'Profile',
           route: '/apps/social',
           icon: icMail,
-        },];
+        }, ];
     } else if (currentUser.role === 'Admin'){
     this.navigationService.items = [{
       type: 'link',
