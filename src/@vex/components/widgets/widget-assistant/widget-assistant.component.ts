@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import icCheckCircle from '@iconify/icons-ic/twotone-check-circle';
 import {DateTime} from 'luxon';
+import {User} from '../../../../app/core/model/user';
 
 @Component({
   selector: 'vex-widget-assistant',
@@ -9,6 +10,7 @@ import {DateTime} from 'luxon';
 })
 export class WidgetAssistantComponent implements OnInit {
 
+  @Input() user: User;
   icCheckCircle = icCheckCircle;
   date = DateTime.local().toFormat('DD');
   dayName = DateTime.local().toFormat('EEEE');

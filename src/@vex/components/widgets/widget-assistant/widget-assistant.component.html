@@ -4,18 +4,33 @@
   </div>
 
   <div class="p-3 text-primary-contrast" fxFlex="auto">
-    <h2 class="headline m-0">David Smith</h2>
+    <h2 class="headline m-0">{{user.firstName}} {{user.lastName}}</h2>
       <p class="body-2 m-0">COVID-19 Status</p>
 
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <button mat-raised-button color="primary">SAFE</button>
+    <div *ngIf="user.covidStatus == 'GREEN'" class="status-box-success">
+      <p>{{user.covidStatus}}</p>
+    </div>
+
+    <div *ngIf="user.covidStatus == 'BLUE'" class="status-box-info">
+      <p>{{user.covidStatus}}</p>
+    </div>
+
+    <div *ngIf="user.covidStatus == 'RED'" class="status-box-dang">
+      <p>{{user.covidStatus}}</p>
     </div>
 
     <p class="body-2 m-0">Risk Status</p>
 
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <button mat-raised-button color="primary">SAFE</button>
+    <div *ngIf="user.riskStatus == 'GREEN'" class="status-box-success">
+      <p>{{user.riskStatus}}</p>
     </div>
 
+    <div *ngIf="user.riskStatus == 'YELLOW'" class="status-box-warn">
+      <p>{{user.riskStatus}}</p>
+    </div>
+
+    <div *ngIf="user.riskStatus == 'RED'" class="status-box-dang">
+      <p>{{user.riskStatus}}</p>
+    </div>
   </div>
 </div>

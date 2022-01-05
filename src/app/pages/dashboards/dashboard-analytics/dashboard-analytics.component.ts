@@ -11,6 +11,11 @@ import icFavorite from '@iconify/icons-ic/twotone-favorite';
 import icAccessTime from '@iconify/icons-ic/twotone-access-time';
 import icPerson from '@iconify/icons-ic/twotone-person';
 import icBeenhere from '@iconify/icons-ic/twotone-beenhere';
+import {User} from '../../../core/model/user';
+import {UserDto} from '../../../core/model/UserDto';
+import {UserService} from '../../../core/service/user.service';
+import {IndicatorService} from '../../../core/service/indicator.service';
+import {Indicator} from '../../../core/model/Indicator';
 
 @Component({
   selector: 'vex-dashboard-analytics',
@@ -19,94 +24,40 @@ import icBeenhere from '@iconify/icons-ic/twotone-beenhere';
 })
 export class DashboardAnalyticsComponent implements OnInit {
 
-  tableColumns: TableColumn<Order>[] = [
-    {
-      label: '',
-      property: 'status',
-      type: 'badge'
-    },
-    {
-      label: 'PRODUCT',
-      property: 'name',
-      type: 'text'
-    },
-    {
-      label: '$ PRICE',
-      property: 'price',
-      type: 'text',
-      cssClasses: ['font-medium']
-    },
-    {
-      label: 'DATE',
-      property: 'timestamp',
-      type: 'text',
-      cssClasses: ['text-secondary']
-    }
-  ];
-  tableData = tableSalesData;
-
-  series: ApexAxisChartSeries = [{
-    name: 'Subscribers',
-    data: [28, 40, 36, 0, 52, 38, 60, 55, 67, 33, 89, 44]
-  }];
+  user: User;
+  userDTO: UserDto;
+  indicators: Indicator[];
+  lastIndicator: Indicator;
 
   userSessionsSeries: ApexAxisChartSeries = [
     {
       name: 'Blood Pressure',
       data: [10, 50, 26, 50, 38, 60, 50, 25, 61, 80, 40, 60]
-    },
-    {
-      name: 'Heart Rate',
-      data: [65, 45, 46, 70, 78, 50, 90, 85, 71, 50, 40, 30]
-    },
-    {
-      name: 'Temperature',
-      data: [5, 21, 42, 70, 41, 20, 35, 50, 10, 15, 30, 50]
-    },
+    }
   ];
-
-  salesSeries: ApexAxisChartSeries = [{
-    name: 'Sales',
-    data: [28, 40, 36, 0, 52, 38, 60, 55, 99, 54, 38, 87]
-  }];
-
-  pageViewsSeries: ApexAxisChartSeries = [{
-    name: 'Page Views',
-    data: [405, 800, 200, 600, 105, 788, 600, 204]
-  }];
-
-  uniqueUsersSeries: ApexAxisChartSeries = [{
-    name: 'Unique Users',
-    data: [356, 806, 600, 754, 432, 854, 555, 1004]
-  }];
-
-  uniqueUsersOptions = defaultChartOptions({
-    chart: {
-      type: 'area',
-      height: 100
-    },
-    colors: ['#ff9800']
-  });
-
-  icGroup = icGroup;
   icFavorite = icFavorite;
   icPerson = icPerson;
   icMoreVert = icBeenhere;
 
-  constructor(private cd: ChangeDetectorRef) { }
-
-  ngOnInit() {
-    setTimeout(() => {
-      const temp = [
-        {
-          name: 'Subscribers',
-          data: [55, 213, 55, 0, 213, 55, 33, 55]
-        },
-        {
-          name: ''
-        }
-      ];
-    }, 3000);
+  constructor(private cd: ChangeDetectorRef, private userService: UserService, private indocatorService: IndicatorService) {
   }
 
+  ngOnInit() {
+    this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
+    this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
+      this.user = res;
+    });
+    this.indocatorService.getIndicatorDetailsById(this.userDTO.id).subscribe(res => {
+      this.indicators = res;
+      console.log(this.indicators.map((item) => item.bloodPressure));
+      this.indicators = this.indicators.sort(function(x, y) {
+        return x.checkTime - y.checkTime;
+      });
+      for (const i of this.indicators) {
+        if (i.isLast === true) {
+          this.lastIndicator = i;
+        }
+      }
+    });
+  }
 }

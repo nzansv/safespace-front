@@ -101,6 +101,22 @@ export class AppComponent {
     /**
      * Add your own routes here
      */
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser.role === 'User'){
+      this.navigationService.items = [{
+        type: 'link',
+        label: 'Dashboard',
+        route: '/',
+        icon: icLayers,
+        routerLinkActiveOptions: { exact: true }
+      },
+        {
+          type: 'link',
+          label: 'Profile',
+          route: '/apps/social',
+          icon: icMail,
+        },];
+    } else if (currentUser.role === 'Admin'){
     this.navigationService.items = [{
       type: 'link',
       label: 'Dashboard',
@@ -638,6 +654,6 @@ export class AppComponent {
         route: () => this.layoutService.openConfigpanel(),
         icon: icSettings
       }
-    ];
+    ]; }
   }
 }

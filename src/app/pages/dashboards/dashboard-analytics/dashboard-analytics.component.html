@@ -12,7 +12,7 @@
      gdColumns.lt-sm="1fr"
      gdGap="16px"
      vexContainer>
-  <vex-widget-assistant gdColumn.lt-sm="1"></vex-widget-assistant>
+  <vex-widget-assistant [user]="user" gdColumn.lt-sm="1"></vex-widget-assistant>
 
 
 
@@ -22,19 +22,20 @@
                                  iconClass="text-primary bg-primary-light"
                                  gdColumn.lt-sm="1"
                                  label="Temperature"
-                                 value="36,7°C"></vex-widget-quick-value-center>
+                                 value="{{lastIndicator.temperature}}°C"></vex-widget-quick-value-center>
   <vex-widget-quick-value-center
                                  [icon]="icFavorite"
                                  iconClass="text-orange bg-orange-light"
                                  gdColumn.lt-sm="1"
                                  label="Heart Rate"
-                                 value="80 pt."></vex-widget-quick-value-center>
+                                 value="{{lastIndicator.heartRate}} pt."></vex-widget-quick-value-center>
+
   <vex-widget-quick-value-center
-                                 [icon]="icMoreVert"
-                                 iconClass="text-deep-orange bg-deep-orange-light"
-                                 gdColumn.lt-sm="1"
-                                 label="Blood Pressure"
-                                 value="123 mmHg"></vex-widget-quick-value-center>
+                                [icon]="icMoreVert"
+                                iconClass="text-deep-orange bg-deep-orange-light"
+                                gdColumn.lt-sm="1"
+                                label="Blood Pressure"
+                                value="{{lastIndicator.bloodPressure}} mmHg"></vex-widget-quick-value-center>
 
   <vex-widget-large-chart [series]="userSessionsSeries"
                           gdColumn="1 / 3"
