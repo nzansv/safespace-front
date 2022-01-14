@@ -12,7 +12,7 @@ export class IndicatorService {
     constructor(private http: HttpClient, private router: Router) {
     }
     getIndicatorDetailsById(id): Observable<any>{
-        return this.http.get(`${this.GENERAL}/user/${id}`);
+        return this.http.get(`${this.GENERAL}/user/all/${id}`);
     }
 
 }

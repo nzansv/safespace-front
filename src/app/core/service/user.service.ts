@@ -18,7 +18,7 @@ export class UserService {
   }
 
   getUserDetailsById(id): Observable<any>{
-    return this.http.get(`${this.GENERAL_USER_DETAIL}/${id}`);
+    return this.http.get(`${this.GENERAL_USER_DETAIL}/byUserId/${id}`);
   }
 
 }
