@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "safespace-b67e3": {
+      "hosting": {
+        "vex": [
+          "safespace-b67e3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "safespace-b67e3"
+  }
+}
