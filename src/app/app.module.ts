@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireMessagingModule} from '@angular/fire/compat/messaging';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule,
     // Vex
     VexModule,
     CustomLayoutModule,

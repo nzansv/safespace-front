@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, Renderer2 } from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit, Renderer2} from '@angular/core';
 import { ConfigService } from '../@vex/services/config.service';
 import { Settings } from 'luxon';
 import { DOCUMENT } from '@angular/common';
@@ -35,13 +35,15 @@ import { Style, StyleService } from '../@vex/services/style.service';
 import icChromeReaderMode from '@iconify/icons-ic/twotone-chrome-reader-mode';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icMail from '@iconify/icons-ic/twotone-mail';
+import {AngularFireMessaging} from '@angular/fire/compat/messaging';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'vex-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'vex';
 
   constructor(private configService: ConfigService,
@@ -52,6 +54,8 @@ export class AppComponent {
               @Inject(LOCALE_ID) private localeId: string,
               private layoutService: LayoutService,
               private route: ActivatedRoute,
+              private msg: AngularFireMessaging,
+              private http: HttpClient,
               private navigationService: NavigationService,
               private splashScreenService: SplashScreenService) {
     Settings.defaultLocale = this.localeId;
@@ -642,4 +646,24 @@ export class AppComponent {
       }
     ];
   }
+  ngOnInit() {
+
+    this.msg.requestToken.subscribe(token => {
+
+      console.log(token);
+      this.http.post('/notification', {
+        target: token,
+        title: 'hello world',
+        message: 'First notification, kinda nervous',
+      }).subscribe(() => {  });
+
+
+    }, error => {
+
+      console.log(error);
+
+    });
+
+  }
+
 }
