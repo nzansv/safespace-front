@@ -650,6 +650,7 @@ export class AppComponent implements OnInit{
 
     this.msg.requestToken.subscribe(token => {
 
+      console.log('token');
       console.log(token);
       this.http.post('/notification', {
         target: token,
