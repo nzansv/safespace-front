@@ -141,6 +141,16 @@
               "devServerTarget": "vex:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "vex:build:production",
+            "firebaseProject": "safespace-b67e3",
+            "firebaseHostingSite": "safespace-b67e3"
+          }
         }
       }
     }
