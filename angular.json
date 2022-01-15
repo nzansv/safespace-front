@@ -31,7 +31,8 @@
               "src/_redirects",
               "src/README.md",
               "src/CHANGELOG.md",
-              "src/.htaccess"
+              "src/.htaccess",
+              "src/manifest.json"
             ],
             "styles": [
               "src/@vex/styles/tailwind.scss",
