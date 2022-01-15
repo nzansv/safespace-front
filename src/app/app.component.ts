@@ -37,6 +37,7 @@ import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icMail from '@iconify/icons-ic/twotone-mail';
 import {AngularFireMessaging} from '@angular/fire/compat/messaging';
 import {HttpClient} from '@angular/common/http';
+import {Message} from './core/model/Message';
 
 @Component({
   selector: 'vex-root',
@@ -45,7 +46,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent implements OnInit{
   title = 'vex';
-
+  messages: Array<Message> = [];
   constructor(private configService: ConfigService,
               private styleService: StyleService,
               private renderer: Renderer2,
@@ -651,6 +652,7 @@ export class AppComponent implements OnInit{
 
     this.msg.requestToken.subscribe(token => {
 
+      console.log('token');
       console.log(token);
       this.http.post('/notification', {
         target: token,
@@ -663,6 +665,14 @@ export class AppComponent implements OnInit{
 
       console.log(error);
 
+    });
+
+    this.msg.onMessage((payload) => {
+      // Get the data about the notification
+      const notification = payload.notification;
+      // Create a Message object and add it to the array
+      this.messages.push({title: notification.title, body: notification.body, iconUrl: notification.icon});
+      console.log(this.messages)
     });
 
   }
