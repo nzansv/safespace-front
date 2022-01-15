@@ -35,9 +35,7 @@ import { Style, StyleService } from '../@vex/services/style.service';
 import icChromeReaderMode from '@iconify/icons-ic/twotone-chrome-reader-mode';
 import { ConfigName } from '../@vex/interfaces/config-name.model';
 import icMail from '@iconify/icons-ic/twotone-mail';
-import {AngularFireMessaging} from '@angular/fire/compat/messaging';
 import {HttpClient} from '@angular/common/http';
-import {Message} from './core/model/Message';
 
 @Component({
   selector: 'vex-root',
@@ -46,7 +44,6 @@ import {Message} from './core/model/Message';
 })
 export class AppComponent implements OnInit{
   title = 'vex';
-  messages: Array<Message> = [];
   constructor(private configService: ConfigService,
               private styleService: StyleService,
               private renderer: Renderer2,
@@ -55,7 +52,6 @@ export class AppComponent implements OnInit{
               @Inject(LOCALE_ID) private localeId: string,
               private layoutService: LayoutService,
               private route: ActivatedRoute,
-              private msg: AngularFireMessaging,
               private http: HttpClient,
               private navigationService: NavigationService,
               private splashScreenService: SplashScreenService) {
@@ -648,33 +644,6 @@ export class AppComponent implements OnInit{
         }
       ]; }
   }
-  ngOnInit() {
-
-    this.msg.requestToken.subscribe(token => {
-
-      console.log('token');
-      console.log(token);
-      this.http.post('/notification', {
-        target: token,
-        title: 'hello world',
-        message: 'First notification, kinda nervous',
-      }).subscribe(() => {  });
-
-
-    }, error => {
-
-      console.log(error);
-
-    });
-
-    this.msg.onMessage((payload) => {
-      // Get the data about the notification
-      const notification = payload.notification;
-      // Create a Message object and add it to the array
-      this.messages.push({title: notification.title, body: notification.body, iconUrl: notification.icon});
-      console.log(this.messages)
-    });
-
-  }
+  ngOnInit() {}
 
 }
