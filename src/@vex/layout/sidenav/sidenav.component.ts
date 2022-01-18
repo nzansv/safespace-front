@@ -20,14 +20,16 @@ export class SidenavComponent implements OnInit {
   imageUrl$ = this.configService.config$.pipe(map(config => config.sidenav.imageUrl));
   showCollapsePin$ = this.configService.config$.pipe(map(config => config.sidenav.showCollapsePin));
 
-  items = this.navigationService.items;
+  items;
   trackByRoute = trackByRoute;
   icRadioButtonChecked = icRadioButtonChecked;
   icRadioButtonUnchecked = icRadioButtonUnchecked;
 
   constructor(private navigationService: NavigationService,
               private layoutService: LayoutService,
-              private configService: ConfigService) { }
+              private configService: ConfigService) {
+    this.items = this.navigationService.items;
+  }
 
   ngOnInit() {
   }

@@ -15,6 +15,9 @@ import icSettings from '@iconify/icons-ic/twotone-settings';
 import { NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { getAllParams } from '../../../../../@vex/utils/check-router-childs-data';
+import {NotificationService} from '../services/notification.service';
+import {BehaviorSubject} from 'rxjs';
+import {Notification} from '../interfaces/notification.interface';
 
 @Component({
   selector: 'vex-mail-list',
@@ -29,6 +32,9 @@ export class MailListComponent implements OnInit {
 
   mails$ = this.mailService.filteredMails$;
   gtSm$ = this.layoutService.gtSm$;
+  // notifications: Notification[];
+  notifications;
+  notifications$;
 
   hasActiveMail$ = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
@@ -45,28 +51,37 @@ export class MailListComponent implements OnInit {
 
   trackById = trackById;
 
-  selection = new SelectionModel<Mail['id']>(true, []);
+  selection = new SelectionModel<Notification['id']>(true, []);
 
   constructor(private mailService: MailService,
               private layoutService: LayoutService,
-              private router: Router) { }
+              private notificationService: NotificationService,
+              private router: Router) {}
 
   ngOnInit(): void {
-  }
+    if (JSON.parse(localStorage.getItem('currentUser'))) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-  masterToggle(mails: Mail[] | null, change: MatCheckboxChange) {
-    if (change.checked) {
-      this.selection.select(...mails?.map(mail => mail.id));
-    } else {
-      this.selection.deselect(...mails?.map(mail => mail.id));
+      this.notificationService.getAll(currentUser.id).subscribe(val => {
+        this.notifications = new BehaviorSubject(val);
+        this.notifications$ = this.notifications.asObservable();
+      });
     }
   }
 
-  isAllSelected(mails: Mail[]): boolean {
-    return mails?.length > 0 && mails?.length === this.selection.selected?.length;
+  masterToggle(notes: Notification[] | null, change: MatCheckboxChange) {
+    if (change.checked) {
+      this.selection.select(...notes?.map(note => note.id));
+    } else {
+      this.selection.deselect(...notes?.map(note => note.id));
+    }
   }
 
-  isSomeButNotAllSelected(mails: Mail[]): boolean {
-    return !this.isAllSelected(mails) && this.selection.hasValue();
+  isAllSelected(notes: Notification[]): boolean {
+    return notes?.length > 0 && notes?.length === this.selection.selected?.length;
+  }
+
+  isSomeButNotAllSelected(notes: Notification[]): boolean {
+    return !this.isAllSelected(notes) && this.selection.hasValue();
   }
 }

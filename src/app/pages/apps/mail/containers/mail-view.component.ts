@@ -14,6 +14,8 @@ import icClose from '@iconify/icons-ic/twotone-close';
 import { fadeInUp400ms } from '../../../../../@vex/animations/fade-in-up.animation';
 import icArrowBack from '@iconify/icons-ic/twotone-arrow-back';
 import { LayoutService } from '../../../../../@vex/services/layout.service';
+import {Notification} from '../interfaces/notification.interface';
+import {NotificationService} from '../services/notification.service';
 
 @Component({
   selector: 'vex-mail-view',
@@ -26,12 +28,14 @@ import { LayoutService } from '../../../../../@vex/services/layout.service';
 })
 export class MailViewComponent implements OnInit, OnDestroy {
 
+  notification: Notification;
   mail$: Observable<Mail> = combineLatest(
     this.route.paramMap.pipe(map(paramMap => +paramMap.get('mailId'))),
     this.mailService.mails$
   ).pipe(
     map(([mailId, mails]) => mails?.find(m => m.id === mailId))
   );
+  id;
 
   gtSm$ = this.layoutService.gtSm$;
 
@@ -48,7 +52,16 @@ export class MailViewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private mailService: MailService,
               private layoutService: LayoutService,
-              private cd: ChangeDetectorRef) { }
+              private cd: ChangeDetectorRef,
+              private notificationService: NotificationService) {
+    this.route.params.subscribe(prm => {
+      this.notificationService.getById(prm['mailId']).subscribe(val => {
+        this.notification = val;
+        console.log('this.notification');
+        console.log(this.notification);
+      });
+    });
+  }
 
   ngOnInit(): void {
   }
