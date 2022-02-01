@@ -21,28 +21,28 @@ import { ContainerModule } from '../../../../@vex/directives/container/container
 
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarEditComponent],
-  imports: [
-    CommonModule,
-    CalendarRoutingModule,
-    AngularCalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    ScrollbarModule,
-    MatSnackBarModule,
-    MatInputModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    PageLayoutModule,
-    MatNativeDateModule,
-    IconModule,
-    ContainerModule
-  ],
-  entryComponents: [CalendarEditComponent]
+    declarations: [CalendarComponent, CalendarEditComponent],
+    imports: [
+        CommonModule,
+        CalendarRoutingModule,
+        AngularCalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        ScrollbarModule,
+        MatSnackBarModule,
+        MatInputModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        PageLayoutModule,
+        MatNativeDateModule,
+        IconModule,
+        ContainerModule
+    ],
+    entryComponents: [CalendarEditComponent]
 })
 export class CalendarModule {
 }

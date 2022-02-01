@@ -14,5 +14,11 @@ export class IndicatorService {
     getIndicatorDetailsById(id): Observable<any>{
         return this.http.get(`${this.GENERAL}/user/all/${id}`);
     }
+    getByUserIdAndIsLast(id): Observable<any>{
+        return this.http.get(`${this.GENERAL}/user/last/${id}`);
+    }
+    getAvgIndicatorDetailsById(id): Observable<any>{
+        return this.http.get(`${this.GENERAL}/user/all/avg/${id}`);
+    }
 
 }

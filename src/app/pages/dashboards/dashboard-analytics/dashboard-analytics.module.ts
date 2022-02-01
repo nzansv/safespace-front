@@ -19,30 +19,38 @@ import { BreadcrumbsModule } from '../../../../@vex/components/breadcrumbs/bread
 import { MatButtonModule } from '@angular/material/button';
 import { PageLayoutModule } from '../../../../@vex/components/page-layout/page-layout.module';
 import { ContainerModule } from '../../../../@vex/directives/container/container.module';
+import {CalendarModule} from '../../apps/calendar/calendar.module';
+import {MatCalendar, MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
   declarations: [DashboardAnalyticsComponent],
-  imports: [
-    CommonModule,
-    DashboardAnalyticsRoutingModule,
-    FlexLayoutModule,
-    ChartModule,
-    MatIconModule,
-    WidgetQuickLineChartModule,
-    WidgetQuickValueCenterModule,
-    WidgetQuickValueStartModule,
-    WidgetLargeGoalChartModule,
-    IconModule,
-    WidgetAssistantModule,
-    WidgetLargeChartModule,
-    WidgetTableModule,
-    SecondaryToolbarModule,
-    BreadcrumbsModule,
-    MatButtonModule,
-    PageLayoutModule,
-    ContainerModule
-  ]
+    imports: [
+        CommonModule,
+        DashboardAnalyticsRoutingModule,
+        FlexLayoutModule,
+        ChartModule,
+        MatIconModule,
+        WidgetQuickLineChartModule,
+        WidgetQuickValueCenterModule,
+        WidgetQuickValueStartModule,
+        WidgetLargeGoalChartModule,
+        IconModule,
+        WidgetAssistantModule,
+        WidgetLargeChartModule,
+        WidgetTableModule,
+        MatTableModule,
+        SecondaryToolbarModule,
+        BreadcrumbsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDatepickerModule,
+        PageLayoutModule,
+        ContainerModule,
+        CalendarModule
+    ]
 })
 export class DashboardAnalyticsModule {
 }
