@@ -122,7 +122,24 @@ export class AppComponent implements OnInit {
                         type: 'link',
                         label: 'Profile',
                         route: '/apps/social',
-                        icon: icMail,
+                        icon: icPersonOutline,
+                    },
+                    {
+                        type: 'dropdown',
+                        label: 'Task',
+                        icon: icBook,
+                        children: [
+                            {
+                                type: 'link',
+                                label: 'Create task',
+                                route: '/apps/help-center/getting-started'
+                            },
+                            {
+                                type: 'link',
+                                label: 'Task list',
+                                route: '/apps/help-center/pricing'
+                            }
+                        ]
                     },
                     {
                         type: 'subheading',
