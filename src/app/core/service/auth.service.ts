@@ -11,14 +11,13 @@ import {UserDto} from '../model/UserDto';
 })
 export class AuthService {
 
-    private currentUserSubject: BehaviorSubject<UserDto>;
-    public currentUser: Observable<UserDto>;
+    private currentUserSubject = new BehaviorSubject<UserDto>(null);
+    currentUser = this.currentUserSubject.asObservable();
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<UserDto>(
-            JSON.parse(localStorage.getItem('currentUser'))
-        );
-        this.currentUser = this.currentUserSubject.asObservable();
+        // this.currentUserSubject = new BehaviorSubject<UserDto>(
+        //     JSON.parse(localStorage.getItem('currentUser'))
+        // );
     }
 
     login(username: string, password: string): Observable<any>{

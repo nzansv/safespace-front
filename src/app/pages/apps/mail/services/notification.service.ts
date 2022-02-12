@@ -12,7 +12,7 @@ import {NavigationService} from '../../../../../@vex/services/navigation.service
 export class NotificationService {
 
   api = '/notify/';
-  private countNotes = new Subject<any>();
+  private countNotes = new BehaviorSubject<any>(0);
   countNotes$ = this.countNotes.asObservable();
   currentUser;
 
@@ -25,8 +25,10 @@ export class NotificationService {
     }
   }
 
-  setCountNotes(count) {
-    this.countNotes.next(count);
+  getNotes() {
+    this.countNotes$.subscribe(v => {
+      return v;
+    });
   }
 
   public getAll(userId: number): Observable<any> {

@@ -68,7 +68,6 @@ export class DashboardAnalyticsComponent implements OnInit {
 
   getLastIndicators(){
     this.indicatorService.getByUserIdAndIsLast(this.userDTO.id).subscribe(res => {
-      console.log('hesfd sdf => ', res);
       this.lastIndicator = res;
     });
   }
