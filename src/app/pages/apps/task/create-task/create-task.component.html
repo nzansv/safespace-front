@@ -1,0 +1,54 @@
+<div class="container py-gutter">
+    <div class="card overflow-hidden">
+
+        <div class="z-10 relative -mt-16 px-gutter flex items-center">
+
+            <div class="max-w-full flex-auto sm:ltr:ml-6 sm:rtl:mr-6">
+                <div class="h-16 flex items-center">
+                    <h1 class="headline text-contrast-white m-0">Create Task</h1>
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row md:items-start">
+                    <div class="flex-auto" style="text-align: center">
+
+                            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+                                <h2 class="title m-0">Create Task</h2>
+                            </div>
+                        <form class="m-4" (ngSubmit)="createTask()">
+
+                            <div class="px-6 pt-4 pb-0" fxLayout="column">
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Choose employee</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let food of foods" [value]="food.value">
+                                            {{food.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="standard" class="vex-flex-form-field" color="accent">
+                                    <mat-label>Complaint</mat-label>
+                                    <textarea  [(ngModel)]="task.complaints" name="complaints" matInput placeholder="Complaint"></textarea>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="standard" class="vex-flex-form-field" color="warn">
+                                    <mat-label>Recommendation</mat-label>
+                                    <textarea  [(ngModel)]="task.recommendations" name="recommendations"  matInput placeholder="Recommendation"></textarea>
+
+                                </mat-form-field>
+                            </div>
+
+                        <button color="primary" mat-raised-button style="margin: 10px">
+                            Submit
+                        </button>
+                        </form>
+
+                        </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

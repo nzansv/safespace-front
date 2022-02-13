@@ -102,13 +102,13 @@ export class SidenavComponent implements OnInit {
               {
                 type: 'link',
                 label: 'Create task',
-                route: '/apps/help-center/getting-started'
+                route: '/apps/task/create-task'
               },
               {
                 type: 'link',
                 label: 'Task list',
-                route: '/apps/help-center/pricing'
-              }
+                route: '/apps/task/task-list'
+              },
             ]
           },
           {

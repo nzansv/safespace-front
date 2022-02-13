@@ -11,9 +11,6 @@ export class IndicatorService {
 
     constructor(private http: HttpClient, private router: Router) {
     }
-    getIndicatorDetailsById(id): Observable<any>{
-        return this.http.get(`${this.GENERAL}/user/all/${id}`);
-    }
     getByUserIdAndIsLast(id): Observable<any>{
         return this.http.get(`${this.GENERAL}/user/last/${id}`);
     }

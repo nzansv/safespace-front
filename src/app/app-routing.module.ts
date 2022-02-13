@@ -78,6 +78,10 @@ const routes: VexRoutes = [
             loadChildren: () => import('./pages/apps/scrumboard/scrumboard.module').then(m => m.ScrumboardModule),
           },
           {
+            path: 'task',
+            loadChildren: () => import('./pages/apps/task/task.module').then(m => m.TaskModule),
+          },
+          {
             path: 'editor',
             loadChildren: () => import('./pages/apps/editor/editor.module').then(m => m.EditorModule),
           },
