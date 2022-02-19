@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import { TaskRoutingModule } from './task-routing.module';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -24,6 +24,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectSearchModule} from 'mat-select-search';
 
 
 @NgModule({
@@ -53,7 +54,11 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     ContainerModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectSearchModule
+  ],
+  providers: [
+    DatePipe,
   ]
 })
 export class TaskModule { }

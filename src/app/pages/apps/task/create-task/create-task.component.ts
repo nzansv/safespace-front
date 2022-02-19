@@ -3,6 +3,8 @@ import {TaskService} from '../../../../core/service/task.service';
 import {UserService} from '../../../../core/service/user.service';
 import {User} from '../../../../core/model/user';
 import {Task} from '../../../../core/model/task';
+import {DatePipe} from '@angular/common';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 interface Food {
   value: string;
@@ -15,33 +17,46 @@ interface Food {
   styleUrls: ['./create-task.component.scss']
 })
 export class CreateTaskComponent implements OnInit {
+  currentUser: any;
+  users: User[];
+  countries: User[];
+  filteredCountries: User[] = [];
   task: Task = {
     employeeId: null,
     doctorId: null,
     complaints: '',
     recommendations: '',
     createdAt: null
-  };
-  currentUser: any;
-  users: User[];
-  constructor(private taskService: TaskService, private userService: UserService) {
+  };  taskForm: FormGroup;
+  constructor(private taskService: TaskService,
+              private userService: UserService,
+              public datePipe: DatePipe,
+              private fb: FormBuilder) {
    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+   this.taskForm = this.createTaskForm();
   }
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Test Tesov'},
-    {value: 'pizza-1', viewValue: 'Adil Adilev'},
-    {value: 'tacos-2', viewValue: 'Nazym Nazymova'},
-  ];
   ngOnInit(): void {
+    this.getAllUsers();
   }
-  createTask(){
+  createForm() {
+    console.log(this.taskForm.getRawValue());
+    this.taskService.createTask(this.taskForm.getRawValue()).subscribe(res => {
+    });
+  }
+  getAllUsers(){
+    this.userService.getUsers().subscribe(res => {
+      this.users = res;
+    });
+  }
+  createTaskForm(): FormGroup {
+    this.task.createdAt = Date.now();
     this.task.doctorId = this.currentUser.id;
-    this.task.employeeId = 12;
-    console.log("3r2r23");
-    console.log(this.task);
-    this.taskService.createTask(this.task).subscribe(res =>
-    {
-      console.log(res);
+    return this.fb.group({
+      createdAt:  Date.now(),
+      employeeId: [this.task.employeeId],
+      doctorId: this.currentUser.id,
+      complaints: [this.task.complaints],
+      recommendations: [this.task.recommendations]
     });
   }
 

@@ -81,7 +81,7 @@ export class AioTableComponent implements OnInit{
     if ($event) {
       param = `page=${$event.pageIndex}&size=${$event.pageSize}`;
     }
-    this.userService.getUsers(param).subscribe(res => {
+    this.userService.getUsersByPagination(param).subscribe(res => {
       this.dataSource = res;
     });
   }

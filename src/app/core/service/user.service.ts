@@ -13,8 +13,12 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  getUsers(params): Observable<any> {
+  getUsersByPagination(params): Observable<any> {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/users?${params}`);
+  }
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.GENERAL_USER_DETAIL}/users/all`);
   }
 
   getUserDetailsById(id): Observable<any>{
