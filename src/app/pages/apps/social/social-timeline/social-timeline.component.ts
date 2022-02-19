@@ -36,16 +36,6 @@ import {Router} from '@angular/router';
 })
 export class SocialTimelineComponent implements OnInit {
 
-  icWork = icWork;
-  icPhone = icPhone;
-  icCheck = icCheck;
-  icMail = icMail;
-  icAccessTime = icAccessTime;
-  icAdd = icAdd;
-  icWhatshot = icWhatshot;
-  icAttachFile = icAttachFile;
-  icKeyboardArrowRight = icKeyboardArrowRight;
-
   user: User;
 
   constructor(private userService: UserService,
