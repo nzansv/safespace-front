@@ -9,6 +9,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CustomLayoutModule } from './custom-layout/custom-layout.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import {JwtInterceptor} from './core/interceptor/jwt.interceptor';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,8 @@ import {JwtInterceptor} from './core/interceptor/jwt.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     // Vex
     VexModule,
     CustomLayoutModule

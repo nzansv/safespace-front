@@ -25,4 +25,8 @@ export class UserService {
     return this.http.get(`${this.GENERAL_USER_DETAIL}/byUserId/${id}`);
   }
 
+  updateUserDetails(user): Observable<any> {
+    return this.http.put(`${this.GENERAL_USER_DETAIL}/createUpdate`, user);
+  }
+
 }

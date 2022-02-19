@@ -17,6 +17,11 @@ import icAddAPhoto from '@iconify/icons-ic/twotone-add-a-photo';
 import icPhotoFilter from '@iconify/icons-ic/twotone-photo-filter';
 import icAttachFile from '@iconify/icons-ic/twotone-attach-file';
 import icKeyboardArrowRight from '@iconify/icons-ic/twotone-keyboard-arrow-right';
+import {UserService} from '../../../../core/service/user.service';
+import {User} from '../../../../core/model/user';
+import {FormControl, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'vex-social-timeline',
@@ -31,35 +36,44 @@ import icKeyboardArrowRight from '@iconify/icons-ic/twotone-keyboard-arrow-right
 })
 export class SocialTimelineComponent implements OnInit {
 
-  suggestions = friendSuggestions;
-
   icWork = icWork;
   icPhone = icPhone;
-  icPersonAdd = icPersonAdd;
   icCheck = icCheck;
   icMail = icMail;
   icAccessTime = icAccessTime;
   icAdd = icAdd;
   icWhatshot = icWhatshot;
-  icAddAPhoto = icAddAPhoto;
-  icPhotoFilter = icPhotoFilter;
   icAttachFile = icAttachFile;
   icKeyboardArrowRight = icKeyboardArrowRight;
 
-  constructor() { }
+  user: User;
+
+  constructor(private userService: UserService,
+              private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    this.userService.getUserDetailsById(currentUser.id).subscribe(v => {
+      this.user = v;
+      // this.user.dateOfBirth = new Date(v.dateOfBirth).toLocaleDateString();
+    });
   }
 
-  addFriend(friend: FriendSuggestion) {
-    friend.added = true;
+  updateUserDetails() {
+    this.userService.updateUserDetails(this.user).subscribe(v => {
+
+      this.snackbar.open('Your details successfully updated!', 'Close', {
+        duration: 3000
+      });
+    }, error => {
+      this.snackbar.open(error.getMessage(), 'Close', {
+        duration: 3000
+      });
+    });
   }
 
-  removeFriend(friend: FriendSuggestion) {
-    friend.added = false;
-  }
-
-  trackByName(index: number, friend: FriendSuggestion) {
-    return friend.name;
+  onChangeDate(value) {
+    this.user.dateOfBirth = new Date(value).getTime();
   }
 }

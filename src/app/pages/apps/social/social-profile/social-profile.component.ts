@@ -31,7 +31,6 @@ import {UserService} from '../../../../core/service/user.service';
 })
 export class SocialProfileComponent implements OnInit {
 
-  suggestions = friendSuggestions;
   user: User;
   userDTO: UserDto;
   icWork = icWork;
@@ -50,17 +49,5 @@ export class SocialProfileComponent implements OnInit {
     this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
       this.user = res;
     });
-  }
-
-  addFriend(friend: FriendSuggestion) {
-    friend.added = true;
-  }
-
-  removeFriend(friend: FriendSuggestion) {
-    friend.added = false;
-  }
-
-  trackByName(index: number, friend: FriendSuggestion) {
-    return friend.name;
   }
 }

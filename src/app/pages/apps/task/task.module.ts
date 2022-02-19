@@ -24,7 +24,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatSelectSearchModule} from 'mat-select-search';
 
 
 @NgModule({
@@ -54,8 +53,7 @@ import {MatSelectSearchModule} from 'mat-select-search';
     ReactiveFormsModule,
     ContainerModule,
     MatSelectModule,
-    MatButtonToggleModule,
-    MatSelectSearchModule
+    MatButtonToggleModule
   ],
   providers: [
     DatePipe,
