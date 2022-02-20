@@ -43,7 +43,7 @@
 <!--                               [ngModelOptions]="{ updateOn: 'blur' }" matInput>-->
                         <input class="form-control" name="dateT"
                                (ngModelChange)="onChangeDate($event)"
-                               [ngModel]="user.dateOfBirth |date:'yyyy-MM-dd'" #dateT="ngModel" type="date"
+                               [ngModel]="user.dateOfBirth | date:'yyyy-MM-dd'" #dateT="ngModel" type="date"
                                [ngModelOptions]="{ updateOn: 'blur' }" matInput/>
 
                     </mat-form-field>

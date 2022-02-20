@@ -18,7 +18,7 @@
 
         <div class="card overflow-auto -mt-16">
 
-            <table @stagger [dataSource]="dataSource" class="w-full" mat-table matSort>
+            <table @stagger [dataSource]="tasks" class="w-full" mat-table matSort>
 
                 <!--- Note that these columns can be defined in any order.
                       The actual rendered columns are set as a property on the row definition" -->
@@ -31,28 +31,28 @@
 
                 <ng-container matColumnDef="created_at">
                     <th mat-header-cell *matHeaderCellDef>Created Date</th>
-                    <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd.MM.yyyy hh:mm:ss'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="employee_id">
                     <th mat-header-cell *matHeaderCellDef>Employee</th>
-                    <td mat-cell *matCellDef="let element"> {{element.employee_id}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.employee}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="doctor_id">
                     <th mat-header-cell *matHeaderCellDef>Doctor</th>
-                    <td mat-cell *matCellDef="let element"> {{element.doctor_id}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.doctor}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="complaints">
-                    <th mat-header-cell *matHeaderCellDef>Complaint</th>
-                    <td mat-cell *matCellDef="let element"> {{element.complaints}} </td>
-                </ng-container>
+<!--                <ng-container matColumnDef="complaints">-->
+<!--                    <th mat-header-cell *matHeaderCellDef>Complaint</th>-->
+<!--                    <td mat-cell *matCellDef="let element"> {{element.complaints}} </td>-->
+<!--                </ng-container>-->
 
-                <ng-container matColumnDef="recommendations">
-                    <th mat-header-cell *matHeaderCellDef>Recommendations</th>
-                    <td mat-cell *matCellDef="let element"> {{element.recommendations}} </td>
-                </ng-container>
+<!--                <ng-container matColumnDef="recommendations">-->
+<!--                    <th mat-header-cell *matHeaderCellDef>Recommendations</th>-->
+<!--                    <td mat-cell *matCellDef="let element"> {{element.recommendations}} </td>-->
+<!--                </ng-container>-->
 
                 <!-- Action Column -->
                 <ng-container matColumnDef="actions">
@@ -72,7 +72,13 @@
                     mat-row></tr>
             </table>
 
-            <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageIndex]="page" [pageSize]="pageSize" class="sticky left-0"></mat-paginator>
+            <mat-paginator #paginator
+                    (page)="getAllTasksContent($event)"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [length]="pageLength"
+                    class="sticky left-0"></mat-paginator>
         </div>
 
     </vex-page-layout-content>

@@ -36,7 +36,7 @@ import {Router} from '@angular/router';
 })
 export class SocialTimelineComponent implements OnInit {
 
-  user: User;
+  user = new User();
 
   constructor(private userService: UserService,
               private snackbar: MatSnackBar) {}
@@ -46,7 +46,6 @@ export class SocialTimelineComponent implements OnInit {
 
     this.userService.getUserDetailsById(currentUser.id).subscribe(v => {
       this.user = v;
-      // this.user.dateOfBirth = new Date(v.dateOfBirth).toLocaleDateString();
     });
   }
 
@@ -57,7 +56,7 @@ export class SocialTimelineComponent implements OnInit {
         duration: 3000
       });
     }, error => {
-      this.snackbar.open(error.getMessage(), 'Close', {
+      this.snackbar.open('Error occurred', 'Close', {
         duration: 3000
       });
     });
