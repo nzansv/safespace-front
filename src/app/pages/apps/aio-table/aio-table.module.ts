@@ -20,10 +20,23 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContainerModule } from '../../../../@vex/directives/container/container.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { EmpDashboardComponent } from './emp-dashboard/emp-dashboard.component';
+import {ChartModule} from '../../../../@vex/components/chart/chart.module';
+import {WidgetQuickLineChartModule} from '../../../../@vex/components/widgets/widget-quick-line-chart/widget-quick-line-chart.module';
+import {WidgetQuickValueCenterModule} from '../../../../@vex/components/widgets/widget-quick-value-center/widget-quick-value-center.module';
+import {WidgetQuickValueStartModule} from '../../../../@vex/components/widgets/widget-quick-value-start/widget-quick-value-start.module';
+import {WidgetLargeGoalChartModule} from '../../../../@vex/components/widgets/widget-large-goal-chart/widget-large-goal-chart.module';
+import {WidgetAssistantModule} from '../../../../@vex/components/widgets/widget-assistant/widget-assistant.module';
+import {WidgetLargeChartModule} from '../../../../@vex/components/widgets/widget-large-chart/widget-large-chart.module';
+import {WidgetTableModule} from '../../../../@vex/components/widgets/widget-table/widget-table.module';
+import {SecondaryToolbarModule} from '../../../../@vex/components/secondary-toolbar/secondary-toolbar.module';
+import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {CalendarModule} from '../calendar/calendar.module';
 
 
 @NgModule({
-  declarations: [AioTableComponent],
+  declarations: [AioTableComponent, EmpDashboardComponent],
   imports: [
     CommonModule,
     AioTableRoutingModule,
@@ -35,8 +48,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
-    MatIconModule,
-    MatButtonModule,
     MatMenuModule,
     IconModule,
     FormsModule,
@@ -44,7 +55,27 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     ReactiveFormsModule,
     ContainerModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    FlexLayoutModule,
+    ChartModule,
+    MatIconModule,
+    WidgetQuickLineChartModule,
+    WidgetQuickValueCenterModule,
+    WidgetQuickValueStartModule,
+    WidgetLargeGoalChartModule,
+    IconModule,
+    WidgetAssistantModule,
+    WidgetLargeChartModule,
+    WidgetTableModule,
+    MatTableModule,
+    SecondaryToolbarModule,
+    BreadcrumbsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDatepickerModule,
+    PageLayoutModule,
+    ContainerModule,
+    CalendarModule
   ]
 })
 export class AioTableModule {

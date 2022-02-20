@@ -1,0 +1,86 @@
+
+<div class="p-gutter"
+     gdColumns="1fr 1fr 1fr 1fr"
+     gdColumns.lt-md="1fr 1fr"
+     gdColumns.lt-sm="1fr"
+     gdGap="16px"
+     vexContainer>
+    <vex-widget-quick-value-center
+            [icon]="icPerson"
+            iconClass="text-primary bg-primary-light"
+            gdColumn.lt-sm="1"
+            label="Temperature"
+            value="{{lastIndicator?.temperature}}°C"></vex-widget-quick-value-center>
+    <vex-widget-quick-value-center
+            [icon]="icFavorite"
+            iconClass="text-orange bg-orange-light"
+            gdColumn.lt-sm="1"
+            label="Heart Rate"
+            value="{{lastIndicator?.heartRate}} pt."></vex-widget-quick-value-center>
+
+    <vex-widget-quick-value-center
+            [icon]="icMoreVert"
+            iconClass="text-deep-orange bg-deep-orange-light"
+            gdColumn.lt-sm="1"
+            label="Blood Pressure"
+            value="{{lastIndicator?.bloodPressure}} mmHg"></vex-widget-quick-value-center>
+    <vex-widget-quick-value-center
+            [icon]="icMoreVert"
+            iconClass="text-deep-orange bg-deep-orange-light"
+            gdColumn.lt-sm="1"
+            label="Blood Oxygen"
+            value="{{lastIndicator?.bloodOxygen}} gg"></vex-widget-quick-value-center>
+
+</div>
+
+
+<div class="p-gutter"
+     gdColumns="1fr 1fr 1fr 1fr"
+     gdColumns.lt-lg="1fr 1fr"
+     gdColumns.lt-lg="1fr"
+     gdGap="16px"
+     vexContainer>
+
+    <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+    </mat-card>
+
+    <table  style="width: 850px" mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="bloodPressure">
+            <th mat-header-cell *matHeaderCellDef> Blood Pressure </th>
+            <td mat-cell *matCellDef="let element"> {{element.bloodPressure}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="bloodOxygen">
+            <th mat-header-cell *matHeaderCellDef> Heart Rate </th>
+            <td mat-cell *matCellDef="let element"> {{element.bloodOxygen}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="heartRate">
+            <th mat-header-cell *matHeaderCellDef> Temperature </th>
+            <td mat-cell *matCellDef="let element"> {{element.heartRate}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="temperature">
+            <th mat-header-cell *matHeaderCellDef> Temperature </th>
+            <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

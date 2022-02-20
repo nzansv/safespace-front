@@ -30,7 +30,8 @@ const routes: VexRoutes = [
       {
         path: '',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./pages/dashboards/dashboard-analytics/dashboard-analytics.module').then(m => m.DashboardAnalyticsModule),
+        loadChildren: () =>
+            import('./pages/dashboards/dashboard-analytics/dashboard-analytics.module').then(m => m.DashboardAnalyticsModule),
       },
       {
         path: 'apps',

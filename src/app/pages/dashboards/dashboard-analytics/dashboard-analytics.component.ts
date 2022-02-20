@@ -1,14 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import icGroup from '@iconify/icons-ic/twotone-group';
-import icPageView from '@iconify/icons-ic/twotone-pageview';
-import icCloudOff from '@iconify/icons-ic/twotone-cloud-off';
-import icTimer from '@iconify/icons-ic/twotone-timer';
-import { defaultChartOptions } from '../../../../@vex/utils/default-chart-options';
-import { Order, tableSalesData } from '../../../../static-data/table-sales-data';
-import { TableColumn } from '../../../../@vex/interfaces/table-column.interface';
-import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
 import icFavorite from '@iconify/icons-ic/twotone-favorite';
-import icAccessTime from '@iconify/icons-ic/twotone-access-time';
 import icPerson from '@iconify/icons-ic/twotone-person';
 import icBeenhere from '@iconify/icons-ic/twotone-beenhere';
 import {User} from '../../../core/model/user';
@@ -49,8 +40,6 @@ export class DashboardAnalyticsComponent implements OnInit {
   userDTO: UserDto;
   indicators: Indicator[];
   lastIndicator: Indicator;
-  timestamps: number[];
-  timestampsMonth: number[];
   icFavorite = icFavorite;
   icPerson = icPerson;
   icMoreVert = icBeenhere;

@@ -22,12 +22,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@ang
 import { stagger40ms } from '../../../../@vex/animations/stagger.animation';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { MatSelectChange } from '@angular/material/select';
-import icPhone from '@iconify/icons-ic/twotone-phone';
-import icMail from '@iconify/icons-ic/twotone-mail';
-import icMap from '@iconify/icons-ic/twotone-map';
 import {UserService} from '../../../core/service/user.service';
 import {User} from '../../../core/model/user';
+import {EmpDashboardComponent} from './emp-dashboard/emp-dashboard.component';
 
 
 @UntilDestroy()
@@ -68,9 +65,15 @@ export class AioTableComponent implements OnInit{
 
   constructor(private dialog: MatDialog, private userService: UserService) {
   }
-
   ngOnInit() {
     this.getAllUsersContent();
+  }
+
+  openDashboard(userId?: User['userId']) {
+    this.dialog.open(EmpDashboardComponent, {
+      data: userId || null,
+      width: '1200px'
+    });
   }
 
   getAllUsersContent(event?: PageEvent): void {

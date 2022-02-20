@@ -4,6 +4,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { VexRoutes } from '../../../../@vex/interfaces/vex-route.interface';
 import { AioTableComponent } from './aio-table.component';
 import {AuthGuard} from '../../../core/guard/auth.guard';
+import {EmpDashboardComponent} from './emp-dashboard/emp-dashboard.component';
 
 
 const routes: VexRoutes = [
@@ -14,6 +15,10 @@ const routes: VexRoutes = [
     data: {
       toolbarShadowEnabled: true
     }
+  } ,
+  {
+    path: ':empId',
+    component: EmpDashboardComponent
   }
 ];
 
