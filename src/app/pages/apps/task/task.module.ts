@@ -24,6 +24,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import {MatInputModule} from '@angular/material/input';
     MatTooltipModule,
     ReactiveFormsModule,
     ContainerModule,
+    NgxMatSelectSearchModule,
     MatSelectModule,
     MatButtonToggleModule
   ],

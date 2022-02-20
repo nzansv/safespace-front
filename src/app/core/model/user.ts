@@ -8,4 +8,5 @@ export class User {
     covidStatus: string;
     phoneNumber: number;
     dateOfBirth: number;
+    userId: number;
 }
