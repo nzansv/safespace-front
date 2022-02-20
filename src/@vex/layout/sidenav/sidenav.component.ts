@@ -657,6 +657,56 @@ export class SidenavComponent implements OnInit {
             },
           }
         ];
+      } else if (currentUser.role === 'Doctor') {
+        this.items = [
+          {
+            type: 'link',
+            label: 'Dashboard',
+            route: '/',
+            icon: icLayers,
+            routerLinkActiveOptions: {exact: true}
+          },
+          {
+            type: 'link',
+            label: 'All Employes',
+            route: '/apps/aio-table',
+            icon: icAssigment
+          },
+          {
+            type: 'link',
+            label: 'Mailbox',
+            route: '/apps/mail',
+            icon: icMail,
+            badge: {
+              value: this.c,
+              bgClass: 'bg-deep-purple',
+              textClass: 'text-deep-purple-contrast',
+            },
+          },
+          {
+            type: 'link',
+            label: 'Profile',
+            route: '/apps/social',
+            icon: icPersonOutline,
+          },
+          {
+            type: 'dropdown',
+            label: 'Task',
+            icon: icBook,
+            children: [
+              {
+                type: 'link',
+                label: 'Create task',
+                route: '/apps/task/create-task'
+              },
+              {
+                type: 'link',
+                label: 'Task list',
+                route: '/apps/task/task-list'
+              },
+            ]
+          }
+        ];
       }
     });
   }
