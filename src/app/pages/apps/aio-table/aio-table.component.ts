@@ -3,7 +3,7 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Customer } from './interfaces/customer.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { TableColumn } from '../../../../@vex/interfaces/table-column.interface';
@@ -54,20 +54,13 @@ export class AioTableComponent implements OnInit{
   displayedColumns: string[] = ['name', 'email', 'position', 'phoneNumber', 'riskStatus', 'covidStatus', 'actions'];
 
   pageSize = 10;
-  page = 0;
+  pageIndex = 0;
+  pageLength = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  dataSource: any[];
+  users: any[];
 
   labels = aioTableLabels;
 
-  icPhone = icPhone;
-  icMail = icMail;
-  icMap = icMap;
-  icEdit = icEdit;
-  icSearch = icSearch;
-  icDelete = icDelete;
-  icAdd = icAdd;
-  icFilterList = icFilterList;
   icFolder = icFolder;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -76,17 +69,25 @@ export class AioTableComponent implements OnInit{
   constructor(private dialog: MatDialog, private userService: UserService) {
   }
 
-  getAllUsersContent($event?): void {
-    let param = `page=0&size=20`;
-    if ($event) {
-      param = `page=${$event.pageIndex}&size=${$event.pageSize}`;
-    }
-    this.userService.getUsersByPagination(param).subscribe(res => {
-      this.dataSource = res;
-    });
-  }
-
   ngOnInit() {
     this.getAllUsersContent();
+  }
+
+  getAllUsersContent(event?: PageEvent): void {
+    let param = '';
+    if (event) {
+      param = `page=${event.pageIndex}&size=${event.pageSize}`;
+    } else {
+      this.pageLength = 0;
+      this.pageIndex = 0;
+      this.pageSize = 5;
+      param = `page=${this.pageIndex}&size=${this.pageSize}`;
+    }
+    this.userService.getUsersByPagination(param).subscribe(res => {
+      this.users = res.content;
+      this.pageIndex = res.pageNumber;
+      this.pageSize = res.pageSize;
+      this.pageLength = res.totalElements;
+    });
   }
 }
