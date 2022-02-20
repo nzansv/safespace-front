@@ -22,7 +22,7 @@
                                                                    placeholderLabel="Search" noEntriesFoundLabel="No Employee Was Found" [formControl]="usersServerSideFilteringCtrl" [searching]="searching"></ngx-mat-select-search>
                                         </mat-option>
                                         <mat-option *ngFor="let user of filteredServerSideUsers | async" [value]="user">
-                                            {{user.firstName}}
+                                            {{user.firstName}} {{user.lastName}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
