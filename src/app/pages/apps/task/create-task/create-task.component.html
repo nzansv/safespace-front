@@ -16,13 +16,13 @@
                             <div class="px-6 pt-4 pb-0" fxLayout="column">
                                 <mat-form-field appearance="legacy">
                                     <mat-label>Choose employee</mat-label>
-                                    <mat-select [formControl]="userCtrl" placeholder="Employee" #singleSelect>
+                                    <mat-select [formControl]="usersServerSideCtrl" placeholder="Bank">
                                         <mat-option>
-                                            <ngx-mat-select-search [formControl]="userFilterCtrl"></ngx-mat-select-search>
+                                            <ngx-mat-select-search hideClearSearchButton = false
+                                                                   placeholderLabel="Search" noEntriesFoundLabel="No Employee Was Found" [formControl]="usersServerSideFilteringCtrl" [searching]="searching"></ngx-mat-select-search>
                                         </mat-option>
-
-                                        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
-                                            {{user.firstName}} {{user.lastName}}
+                                        <mat-option *ngFor="let user of filteredServerSideUsers | async" [value]="user">
+                                            {{user.firstName}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
