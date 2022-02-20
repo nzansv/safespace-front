@@ -85,7 +85,7 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
                 if (!this.users) {
                   return [];
                 }
-                return this.users.filter(user => user.firstName.indexOf(search) > -1);
+                return this.users.filter(user => user.firstName.indexOf(search) > -1 || user.lastName.indexOf(search) > -1);
               }),
               delay(500),
               takeUntil(this._onDestroy)
