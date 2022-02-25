@@ -39,7 +39,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   encapsulation: ViewEncapsulation.None
 })
 export class EmpDashboardComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'bloodPressure', 'bloodOxygen', 'heartRate', 'temperature'];
+  displayedColumns: string[] = ['name', 'upperBloodPressure', 'lowerBloodPressure', 'bloodOxygen', 'heartRate', 'temperature'];
   dataSource = ELEMENT_DATA;
   selected: Date | null;
   user: User;

@@ -23,7 +23,7 @@
             iconClass="text-deep-orange bg-deep-orange-light"
             gdColumn.lt-sm="1"
             label="Blood Pressure"
-            value="{{lastIndicator?.bloodPressure}} mmHg"></vex-widget-quick-value-center>
+            value="{{lastIndicator?.upperBloodPressure}} mmHg"></vex-widget-quick-value-center>
     <vex-widget-quick-value-center
             [icon]="icMoreVert"
             iconClass="text-deep-orange bg-deep-orange-light"
@@ -45,7 +45,7 @@
         <mat-calendar [(selected)]="selected"></mat-calendar>
     </mat-card>
 
-    <table  style="width: 850px" mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <table  style="width: 800px" mat-table [dataSource]="dataSource" class="mat-elevation-z2">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -57,9 +57,15 @@
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="bloodPressure">
+        <ng-container matColumnDef="upperBloodPressure">
             <th mat-header-cell *matHeaderCellDef> Blood Pressure </th>
-            <td mat-cell *matCellDef="let element"> {{element.bloodPressure}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.upperBloodPressure}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="lowerBloodPressure">
+            <th mat-header-cell *matHeaderCellDef> Blood Pressure </th>
+            <td mat-cell *matCellDef="let element"> {{element.lowerBloodPressure}} </td>
         </ng-container>
 
         <!-- Symbol Column -->

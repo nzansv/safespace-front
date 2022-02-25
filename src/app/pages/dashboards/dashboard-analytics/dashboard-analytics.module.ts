@@ -23,6 +23,11 @@ import {CalendarModule} from '../../apps/calendar/calendar.module';
 import {MatCalendar, MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatNativeDateModule} from '@angular/material/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -38,6 +43,8 @@ import {MatTableModule} from '@angular/material/table';
         WidgetQuickValueStartModule,
         WidgetLargeGoalChartModule,
         IconModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
         WidgetAssistantModule,
         WidgetLargeChartModule,
         WidgetTableModule,
@@ -49,7 +56,11 @@ import {MatTableModule} from '@angular/material/table';
         MatDatepickerModule,
         PageLayoutModule,
         ContainerModule,
-        CalendarModule
+        CalendarModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule
     ]
 })
 export class DashboardAnalyticsModule {
