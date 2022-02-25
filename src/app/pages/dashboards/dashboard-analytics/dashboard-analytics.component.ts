@@ -24,7 +24,7 @@ export class DashboardAnalyticsComponent implements OnInit {
   displayedColumns: string[] = ['time', 'lowerBloodPressure', 'upperBloodPressure', 'bloodOxygen', 'heartRate', 'temperature'];
   selected: Date | null;
   user: User;
-  pageSize = 10;
+  pageSize = 5;
   pageIndex = 0;
   pageLength = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
@@ -42,21 +42,24 @@ export class DashboardAnalyticsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dateFrom = new Date().setHours(0, 0, 0, 0);
+    this.dateTo = new Date().setHours(23, 59, 59, 999);
     this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
       this.user = res;
       this.getLastIndicators();
+      this.getIndicatorsByDateAndUserIdAndPagination();
     });
   }
 
   onChangeDate(value) {
-    this.dateFrom = new Date(value).getTime();
+    this.dateFrom = new Date(value).setHours(0, 0, 0, 0);
   }
   onChangeDateT(value) {
-    this.dateTo = new Date(value).getTime();
+    this.dateTo = new Date(value).setHours(23, 59, 59, 999);
   }
 
-  getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent){
+  getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent) {
     let param = '';
     if (event) {
       param = `page=${event.pageIndex}&size=${event.pageSize}`;

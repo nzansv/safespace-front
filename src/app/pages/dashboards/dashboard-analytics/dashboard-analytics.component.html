@@ -72,7 +72,7 @@
                    [ngModelOptions]="{ updateOn: 'blur' }" matInput/>
         </mat-form-field>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
-            <button mat-raised-button type="button" (click)="getIndicatorsByDateAndUserIdAndPagination()">SUBMIT
+            <button mat-raised-button type="button" (click)="getIndicatorsByDateAndUserIdAndPagination()">Find
             </button>
         </div>
     </div>
@@ -88,12 +88,12 @@
         </ng-container>
 
         <ng-container matColumnDef="upperBloodPressure">
-            <th mat-header-cell *matHeaderCellDef>Lower Blood Pressure</th>
+            <th mat-header-cell *matHeaderCellDef>Upper Blood Pressure</th>
             <td mat-cell *matCellDef="let element"> {{element.upperBloodPressure}} </td>
         </ng-container>
 
         <ng-container matColumnDef="lowerBloodPressure">
-            <th mat-header-cell *matHeaderCellDef>Upper Blood Pressure</th>
+            <th mat-header-cell *matHeaderCellDef>Lower Blood Pressure</th>
             <td mat-cell *matCellDef="let element"> {{element.lowerBloodPressure}} </td>
         </ng-container>
 

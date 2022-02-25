@@ -15,8 +15,6 @@ export class IndicatorService {
         return this.http.get(`${this.GENERAL}/user/last/${id}`);
     }
     getByDateAndUserIdAndPagination(id, dateFrom, dateTo, params): Observable<any>{
-        dateTo = dateTo + 86400000;
-        console.log('date to' + new Date(dateTo));
         return this.http.get(`${this.GENERAL}/user/date/userId/${dateFrom}/${dateTo}/${id}?${params}`);
     }
     getAvgIndicatorDetailsById(id): Observable<any>{
