@@ -33,6 +33,8 @@ import {SecondaryToolbarModule} from '../../../../@vex/components/secondary-tool
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {CalendarModule} from '../calendar/calendar.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -75,7 +77,11 @@ import {CalendarModule} from '../calendar/calendar.module';
     MatDatepickerModule,
     PageLayoutModule,
     ContainerModule,
-    CalendarModule
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class AioTableModule {

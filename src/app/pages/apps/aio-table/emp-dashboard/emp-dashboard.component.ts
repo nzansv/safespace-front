@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {User} from '../../../../core/model/user';
 import {UserDto} from '../../../../core/model/UserDto';
 import {Indicator} from '../../../../core/model/Indicator';
@@ -13,6 +13,8 @@ import {untilDestroyed} from '@ngneat/until-destroy';
 import {chats} from '../../../../../static-data/chats';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Contact} from '../../contacts/interfaces/contact.interface';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface PeriodicElement {
   name: string;
@@ -39,14 +41,22 @@ const ELEMENT_DATA: PeriodicElement[] = [
   encapsulation: ViewEncapsulation.None
 })
 export class EmpDashboardComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'upperBloodPressure', 'lowerBloodPressure', 'bloodOxygen', 'heartRate', 'temperature'];
+  displayedColumns: string[] = ['time', 'lowerBloodPressure', 'upperBloodPressure', 'bloodOxygen', 'heartRate', 'temperature'];
   dataSource = ELEMENT_DATA;
   selected: Date | null;
+  indicators: any[];
   user: User;
-  indicators: Indicator[];
+  pageSize = 10;
+  pageIndex = 0;
+  pageLength = 0;
+  pageSizeOptions: number[] = [5, 10, 20, 50];
   lastIndicator: Indicator;
   icFavorite = icFavorite;
   icPerson = icPerson;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  dateFrom: number;
+  dateTo: number;
   icMoreVert = icBeenhere;
   constructor(@Inject(MAT_DIALOG_DATA) private empId: User['userId'],
               private route: ActivatedRoute,
@@ -62,6 +72,30 @@ export class EmpDashboardComponent implements OnInit {
         console.log(res);
         this.getLastIndicators();
       });
+  }
+  onChangeDate(value) {
+    this.dateFrom = new Date(value).getTime();
+  }
+  onChangeDateT(value) {
+    this.dateTo = new Date(value).getTime();
+  }
+
+  getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent){
+    let param = '';
+    if (event) {
+      param = `page=${event.pageIndex}&size=${event.pageSize}`;
+    } else {
+      this.pageLength = 0;
+      this.pageIndex = 0;
+      this.pageSize = 5;
+      param = `page=${this.pageIndex}&size=${this.pageSize}`;
+    }
+    this.indicatorService.getByDateAndUserIdAndPagination(this.empId, this.dateFrom, this.dateTo, param).subscribe(res => {
+      this.indicators = res.content;
+      this.pageIndex = res.pageNumber;
+      this.pageSize = res.pageSize;
+      this.pageLength = res.totalElements;
+    });
   }
 
   getLastIndicators(){
