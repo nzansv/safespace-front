@@ -9,6 +9,7 @@ import {IndicatorService} from '../../../core/service/indicator.service';
 import {Indicator} from '../../../core/model/Indicator';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 
@@ -38,7 +39,8 @@ export class DashboardAnalyticsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   dateFrom: number;
   dateTo: number;
-  constructor(private cd: ChangeDetectorRef, private userService: UserService, private indicatorService: IndicatorService) {
+  constructor(private cd: ChangeDetectorRef, private userService: UserService, private indicatorService: IndicatorService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -60,21 +62,28 @@ export class DashboardAnalyticsComponent implements OnInit {
   }
 
   getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent) {
-    let param = '';
-    if (event) {
-      param = `page=${event.pageIndex}&size=${event.pageSize}`;
+    if (this.dateTo < this.dateFrom) {
+      this.snackBar.open('Range of date is not valid!', '', {
+        duration: 3000,
+        horizontalPosition: 'center'
+      });
     } else {
-      this.pageLength = 0;
-      this.pageIndex = 0;
-      this.pageSize = 5;
-      param = `page=${this.pageIndex}&size=${this.pageSize}`;
+      let param = '';
+      if (event) {
+        param = `page=${event.pageIndex}&size=${event.pageSize}`;
+      } else {
+        this.pageLength = 0;
+        this.pageIndex = 0;
+        this.pageSize = 5;
+        param = `page=${this.pageIndex}&size=${this.pageSize}`;
+      }
+      this.indicatorService.getByDateAndUserIdAndPagination(this.userDTO.id, this.dateFrom, this.dateTo, param).subscribe(res => {
+        this.indicators = res.content;
+        this.pageIndex = res.pageNumber;
+        this.pageSize = res.pageSize;
+        this.pageLength = res.totalElements;
+      });
     }
-    this.indicatorService.getByDateAndUserIdAndPagination(this.userDTO.id, this.dateFrom, this.dateTo, param).subscribe(res => {
-      this.indicators = res.content;
-      this.pageIndex = res.pageNumber;
-      this.pageSize = res.pageSize;
-      this.pageLength = res.totalElements;
-    });
   }
 
   getLastIndicators(){
