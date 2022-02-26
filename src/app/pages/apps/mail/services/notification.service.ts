@@ -5,6 +5,7 @@ import {Mail} from '../interfaces/mail.interface';
 import {Notification} from '../interfaces/notification.interface';
 import {fakeMails} from '../../../../../static-data/fakeMails';
 import {NavigationService} from '../../../../../@vex/services/navigation.service';
+import {AuthService} from '../../../../core/service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {NavigationService} from '../../../../../@vex/services/navigation.service
 export class NotificationService {
 
   api = '/notify/';
-  private countNotes = new BehaviorSubject<any>(0);
+  countNotes = new BehaviorSubject<any>(0);
   countNotes$ = this.countNotes.asObservable();
   currentUser;
 
@@ -40,7 +41,7 @@ export class NotificationService {
   }
 
   public getById(id: number): Observable<any> {
-    return this.http.get(this.api + `/get/${id}`);
+    return this.http.get(this.api + `get/${id}`);
   }
 
   markNoteAsRead(noteId: Notification['id']) {
