@@ -1,10 +1,11 @@
 <div class="card bg-primary" fxLayout="row" fxLayout.xs="column">
-  <div class="p-4 ml-4" fxFlex="none" fxFlexAlign="center">
-    <img src="assets/img/illustrations/covid.png" style=" width: 100px">
+  <div class="p-4 ml-4" fxFlex="none" >
+    <img src="assets/img/illustrations/covid.png" style=" width: 70px">
   </div>
 
   <div class="p-3 text-primary-contrast" fxFlex="auto">
-    <h2 class="headline m-0">{{user?.firstName}} {{user?.lastName}}</h2>
+
+    <h3 class=" m-0">{{user?.firstName}} {{user?.lastName}}</h3>
       <p class="body-2 m-0">COVID-19 Status</p>
 
     <div *ngIf="user?.covidStatus == 'GREEN'" class="status-box-success">
