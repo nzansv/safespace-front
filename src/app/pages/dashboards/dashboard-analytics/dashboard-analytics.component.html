@@ -7,12 +7,11 @@
 </vex-secondary-toolbar>
 
 <div class="p-gutter"
-     gdColumns="1fr 1fr 1fr 1fr"
-     gdColumns.lt-md="1fr 1fr"
+     gdColumns="2fr 1fr 1fr 1fr 1fr"
      gdColumns.lt-sm="1fr"
      gdGap="16px"
      vexContainer>
-    <vex-widget-assistant [user]="user" gdColumn.lt-sm="1"></vex-widget-assistant>
+    <vex-widget-assistant [user]="user" gdColumn.lt-sm="2"></vex-widget-assistant>
 
 
     <vex-widget-quick-value-center
@@ -33,13 +32,7 @@
             iconClass="text-deep-orange bg-deep-orange-light"
             gdColumn.lt-sm="1"
             label="Blood Pressure"
-            value="{{lastIndicator?.upperBloodPressure}} mmHg"></vex-widget-quick-value-center>
-    <vex-widget-quick-value-center
-            [icon]="icMoreVert"
-            iconClass="text-deep-orange bg-deep-orange-light"
-            gdColumn.lt-sm="1"
-            label="Lower Blood Pressure"
-            value="{{lastIndicator?.lowerBloodPressure}} mmHg"></vex-widget-quick-value-center>
+            value="{{lastIndicator?.upperBloodPressure}}/{{lastIndicator?.lowerBloodPressure}} mmHg"></vex-widget-quick-value-center>
     <vex-widget-quick-value-center
             [icon]="icMoreVert"
             iconClass="text-deep-orange bg-deep-orange-light"
