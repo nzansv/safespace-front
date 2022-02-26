@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
                 private fb: FormBuilder,
                 private cd: ChangeDetectorRef,
                 private snackbar: MatSnackBar,
-                private authService: AuthService
+                private authService: AuthService,
+                private notificationService: NotificationService
     ) {
     }
 
@@ -75,30 +76,36 @@ export class LoginComponent implements OnInit {
         return this.form.controls;
     }
 
-  send() {
-    if (this.form.invalid) {
-      this.error = 'Username and Password not valid!';
-      console.log(this.error);
-      return;
-    } else {
-      this.authService.login(this.f.username.value, this.f.password.value)
-          .subscribe(res => {
-              if (res) {
-                this.router.navigate(['/']);
-    // this.snackbar.open('Lucky you! Looks like you need a password or username!
-                // For a real application we provide validators to prevent this. ;)', 'LOL THANKS', {
-    //   duration: 10000
-    // });
-              }
-          },
-          err => {
-            if (err.status === 401) {
-              this.showError = true;
-              this.error = 'Log in failed. Please try again!';
-            }
-          });
+    send() {
+        if (this.form.invalid) {
+            this.error = 'Username and Password not valid!';
+            console.log(this.error);
+            return;
+        } else {
+            this.authService.login(this.f.username.value, this.f.password.value)
+                .subscribe(res => {
+                        if (res) {
+                            console.log('user after login');
+                            console.log(res);
+                            this.notificationService.countNew(res.id).subscribe(v => {
+                                console.log(v);
+                                this.notificationService.countNotes.next(v);
+                            });
+                            this.router.navigate(['/']);
+                            // this.snackbar.open('Lucky you! Looks like you need a password or username!
+                            // For a real application we provide validators to prevent this. ;)', 'LOL THANKS', {
+                            //   duration: 10000
+                            // });
+                        }
+                    },
+                    err => {
+                        if (err.status === 401) {
+                            this.showError = true;
+                            this.error = 'Log in failed. Please try again!';
+                        }
+                    });
+        }
     }
-  }
 
     toggleVisibility() {
         if (this.visible) {
