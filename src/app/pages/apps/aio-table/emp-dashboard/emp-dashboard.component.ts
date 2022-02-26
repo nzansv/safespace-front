@@ -15,6 +15,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Contact} from '../../contacts/interfaces/contact.interface';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface PeriodicElement {
   name: string;
@@ -63,39 +64,50 @@ export class EmpDashboardComponent implements OnInit {
               private dialogRef: MatDialogRef<EmpDashboardComponent>,
               private cd: ChangeDetectorRef,
               private userService: UserService,
+              private snackBar: MatSnackBar,
               private indicatorService: IndicatorService) {
   }
 
   ngOnInit() {
-      this.userService.getUserDetailsById(this.empId).subscribe(res => {
+    this.dateFrom = new Date().setHours(0, 0, 0, 0);
+    this.dateTo = new Date().setHours(23, 59, 59, 999);
+    this.userService.getUserDetailsById(this.empId).subscribe(res => {
         this.user = res;
         console.log(res);
         this.getLastIndicators();
+        this.getIndicatorsByDateAndUserIdAndPagination();
       });
   }
   onChangeDate(value) {
-    this.dateFrom = new Date(value).getTime();
+    this.dateFrom = new Date(value).setHours(0, 0, 0, 0);
   }
   onChangeDateT(value) {
-    this.dateTo = new Date(value).getTime();
+    this.dateTo = new Date(value).setHours(23, 59, 59, 999);
   }
 
-  getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent){
-    let param = '';
-    if (event) {
-      param = `page=${event.pageIndex}&size=${event.pageSize}`;
+  getIndicatorsByDateAndUserIdAndPagination(event?: PageEvent) {
+    if (this.dateTo < this.dateFrom) {
+      this.snackBar.open('Range of date is not valid!', '', {
+        duration: 3000,
+        horizontalPosition: 'center'
+      });
     } else {
-      this.pageLength = 0;
-      this.pageIndex = 0;
-      this.pageSize = 5;
-      param = `page=${this.pageIndex}&size=${this.pageSize}`;
+      let param = '';
+      if (event) {
+        param = `page=${event.pageIndex}&size=${event.pageSize}`;
+      } else {
+        this.pageLength = 0;
+        this.pageIndex = 0;
+        this.pageSize = 5;
+        param = `page=${this.pageIndex}&size=${this.pageSize}`;
+      }
+      this.indicatorService.getByDateAndUserIdAndPagination(this.empId, this.dateFrom, this.dateTo, param).subscribe(res => {
+        this.indicators = res.content;
+        this.pageIndex = res.pageNumber;
+        this.pageSize = res.pageSize;
+        this.pageLength = res.totalElements;
+      });
     }
-    this.indicatorService.getByDateAndUserIdAndPagination(this.empId, this.dateFrom, this.dateTo, param).subscribe(res => {
-      this.indicators = res.content;
-      this.pageIndex = res.pageNumber;
-      this.pageSize = res.pageSize;
-      this.pageLength = res.totalElements;
-    });
   }
 
   getLastIndicators(){
