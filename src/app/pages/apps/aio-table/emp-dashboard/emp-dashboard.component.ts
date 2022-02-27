@@ -73,7 +73,6 @@ export class EmpDashboardComponent implements OnInit {
     this.dateTo = new Date().setHours(23, 59, 59, 999);
     this.userService.getUserDetailsById(this.empId).subscribe(res => {
         this.user = res;
-        console.log(res);
         this.getLastIndicators();
         this.getIndicatorsByDateAndUserIdAndPagination();
       });

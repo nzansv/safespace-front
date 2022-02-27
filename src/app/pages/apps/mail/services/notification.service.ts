@@ -46,8 +46,6 @@ export class NotificationService {
 
   markNoteAsRead(noteId: Notification['id']) {
     this.countNew(this.currentUser.id).subscribe(v => {
-      console.log('v');
-      console.log(v);
       this.countNotes.next(v - 1);
     });
     let note;

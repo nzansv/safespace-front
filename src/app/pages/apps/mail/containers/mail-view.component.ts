@@ -57,8 +57,6 @@ export class MailViewComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(prm => {
       this.notificationService.getById(prm['mailId']).subscribe(val => {
         this.notification = val;
-        console.log('this.notification');
-        console.log(this.notification);
       });
     });
   }

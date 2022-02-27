@@ -38,7 +38,6 @@ export class AuthService {
                     user.role = userData.role;
                     user.token = token;
                     localStorage.setItem('currentUser', JSON.stringify(user));
-                    localStorage.setItem('role', JSON.stringify(user.role));
                     this.currentUserSubject.next(user);
                     return user;
                 })
@@ -48,7 +47,6 @@ export class AuthService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        localStorage.removeItem('role');
         this.currentUserSubject.next(null);
         return of({success: false});
     }

@@ -85,10 +85,7 @@ export class LoginComponent implements OnInit {
             this.authService.login(this.f.username.value, this.f.password.value)
                 .subscribe(res => {
                         if (res) {
-                            console.log('user after login');
-                            console.log(res);
                             this.notificationService.countNew(res.id).subscribe(v => {
-                                console.log(v);
                                 this.notificationService.countNotes.next(v);
                             });
                             this.router.navigate(['/']);
