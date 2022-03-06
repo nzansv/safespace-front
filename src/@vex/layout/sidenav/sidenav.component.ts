@@ -59,9 +59,8 @@ export class SidenavComponent implements OnInit {
               private authService: AuthService) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.notificationService.countNotes$.subscribe(v => {
-      console.log('this.c');
-      console.log(this.c);
       this.c = v;
+      console.log(this.c);
 
       this.c = v > 0 ? v : null;
       if (currentUser.role === 'Admin') {
