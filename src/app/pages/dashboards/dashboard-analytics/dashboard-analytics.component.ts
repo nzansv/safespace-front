@@ -10,6 +10,12 @@ import {Indicator} from '../../../core/model/Indicator';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import icInsertComment from '@iconify/icons-ic/twotone-insert-comment';
+import icPersonOutline from '@iconify/icons-ic/twotone-person-outline';
+import icAccessTime from '@iconify/icons-ic/twotone-access-time';
+import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
+import icBookmarks from '@iconify/icons-ic/twotone-bookmarks';
+import icOpacity from '@iconify/icons-ic/baseline-opacity';
 
 @Component({
   selector: 'vex-dashboard-analytics',
@@ -30,6 +36,11 @@ export class DashboardAnalyticsComponent implements OnInit {
   lastIndicator: Indicator;
   icFavorite = icFavorite;
   icPerson = icPerson;
+  icBlood = icOpacity;
+  iconThermometer = 'thermometer';
+  iconPressure = 'pressure';
+  iconHeartRate = 'heart';
+  iconOxygen = 'oxygen';
   icMoreVert = icBeenhere;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

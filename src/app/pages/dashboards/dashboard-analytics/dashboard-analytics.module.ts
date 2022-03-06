@@ -52,6 +52,7 @@ import {MatInputModule} from '@angular/material/input';
         SecondaryToolbarModule,
         BreadcrumbsModule,
         MatButtonModule,
+        MatIconModule,
         MatCardModule,
         MatDatepickerModule,
         PageLayoutModule,
