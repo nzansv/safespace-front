@@ -20,6 +20,9 @@ import icNotificationsOff from '@iconify/icons-ic/twotone-notifications-off';
 import { Icon } from '@visurel/iconify-angular';
 import { PopoverRef } from '../../../../components/popover/popover-ref';
 import {AuthService} from '../../../../../app/core/service/auth.service';
+import {User} from '../../../../../app/core/model/user';
+import {UserDto} from '../../../../../app/core/model/UserDto';
+import {UserService} from '../../../../../app/core/service/user.service';
 
 export interface OnlineStatus {
   id: 'online' | 'away' | 'dnd' | 'offline';
@@ -36,6 +39,8 @@ export interface OnlineStatus {
 })
 export class ToolbarUserDropdownComponent implements OnInit {
 
+  user: User;
+  userDTO: UserDto;
   items: MenuItem[] = [
     {
       id: '1',
@@ -44,30 +49,6 @@ export class ToolbarUserDropdownComponent implements OnInit {
       description: 'Personal Information',
       colorClass: 'text-teal',
       route: '/apps/social'
-    },
-    {
-      id: '2',
-      icon: icMoveToInbox,
-      label: 'My Inbox',
-      description: 'Messages & Latest News',
-      colorClass: 'text-primary',
-      route: '/apps/chat'
-    },
-    {
-      id: '3',
-      icon: icListAlt,
-      label: 'My Projects',
-      description: 'Tasks & Active Projects',
-      colorClass: 'text-amber',
-      route: '/apps/scrumboard'
-    },
-    {
-      id: '4',
-      icon: icTableChart,
-      label: 'Billing Information',
-      description: 'Pricing & Current Plan',
-      colorClass: 'text-purple',
-      route: '/pages/pricing'
     }
   ];
 
@@ -111,10 +92,15 @@ export class ToolbarUserDropdownComponent implements OnInit {
   icNotificationsOff = icNotificationsOff;
 
   constructor(private cd: ChangeDetectorRef,
+              private userService: UserService,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
               private authService: AuthService) { }
 
   ngOnInit() {
+    this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
+    this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
+      this.user = res;
+    });
   }
 
   setStatus(status: OnlineStatus) {
