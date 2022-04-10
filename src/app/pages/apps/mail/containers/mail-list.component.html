@@ -1,6 +1,6 @@
 <div class="vex-mail-content-header flex-none flex items-center px-gutter border-b">
   <mat-checkbox (change)="masterToggle(notes, $event)"
-                *ngIf="notifications | async as notes"
+                *ngIf="notifications as notes"
                 [checked]="isAllSelected(notes)"
                 [indeterminate]="isSomeButNotAllSelected(notes)"
                 color="primary"></mat-checkbox>
@@ -30,16 +30,24 @@
 
   <span class="flex-1"></span>
 
-  <button color="primary" mat-icon-button matTooltip="Settings" matTooltipPosition="below" type="button">
-    <mat-icon [icIcon]="icSettings" size="24px"></mat-icon>
-  </button>
+<!--  <button color="primary" mat-icon-button matTooltip="Settings" matTooltipPosition="below" type="button">-->
+<!--    <mat-icon [icIcon]="icSettings" size="24px"></mat-icon>-->
+<!--  </button>-->
+  <mat-paginator #paginator
+                 [pageIndex]="pageIndex"
+                 [pageSize]="pageSize"
+                 [length]="pageLength"
+                 (page)="getAllNotifications($event)"
+                 hidePageSize="true"
+                 class="sticky left-0"></mat-paginator>
+
 </div>
 
 <div class="flex-auto flex overflow-hidden">
-  <ng-container *ngIf="gtSm$ | async">
+  <ng-container *ngIf="gtSm$ ">
     <vex-scrollbar @stagger class="flex-1 py-3">
       <vex-mail-list-entry (selectedChange)="$event ? selection.select(note.id) : selection.deselect(note.id)"
-                           *ngFor="let note of notifications | async; trackBy: trackById"
+                           *ngFor="let note of notifications ; trackBy: trackById"
                            @fadeInUp
                            [notification]="note"
                            [selected]="selection.isSelected(note.id)"

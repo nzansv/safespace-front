@@ -24,25 +24,25 @@
 
     <mat-drawer-content class="bg-base flex flex-col overflow-hidden">
       <div class="vex-mail-header flex-none bg-primary flex flex-col">
-        <div class="flex-auto flex items-center">
-<!--          <button (click)="drawer.open()" *ngIf="ltLg$ | async" class="mx-gutter" mat-icon-button type="button">-->
-<!--            <mat-icon [icIcon]="icMenu" class="text-contrast-white" size="24px"></mat-icon>-->
-<!--          </button>-->
-          <div class="bg-card shadow rounded-full w-full flex items-center ltr:mr-gutter ml-gutter">
-            <ic-icon [class.p-2]="ltLg$ | async"
-                     [class.px-5]="isDesktop$ | async"
-                     [class.py-4]="isDesktop$ | async"
-                     [icon]="icSearch"
-                     class="text-secondary"
-                     size="24px"></ic-icon>
-            <input [class.h-14]="isDesktop$ | async"
-                   [class.h-8]="ltLg$ | async"
-                   [formControl]="searchCtrl"
-                   class="w-full outline-none placeholder-black bg-transparent"
-                   placeholder="Search mails..."
-                   type="text"/>
-          </div>
-        </div>
+<!--        <div class="flex-auto flex items-center">-->
+<!--&lt;!&ndash;          <button (click)="drawer.open()" *ngIf="ltLg$ | async" class="mx-gutter" mat-icon-button type="button">&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-icon [icIcon]="icMenu" class="text-contrast-white" size="24px"></mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;          </button>&ndash;&gt;-->
+<!--          <div class="bg-card shadow rounded-full w-full flex items-center ltr:mr-gutter ml-gutter">-->
+<!--            <ic-icon [class.p-2]="ltLg$ | async"-->
+<!--                     [class.px-5]="isDesktop$ | async"-->
+<!--                     [class.py-4]="isDesktop$ | async"-->
+<!--                     [icon]="icSearch"-->
+<!--                     class="text-secondary"-->
+<!--                     size="24px"></ic-icon>-->
+<!--            <input [class.h-14]="isDesktop$ | async"-->
+<!--                   [class.h-8]="ltLg$ | async"-->
+<!--                   [formControl]="searchCtrl"-->
+<!--                   class="w-full outline-none placeholder-black bg-transparent"-->
+<!--                   placeholder="Search mails..."-->
+<!--                   type="text"/>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="vex-mail-header-overflow flex-none"></div>
       </div>

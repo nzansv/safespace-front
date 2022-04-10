@@ -32,8 +32,8 @@ export class NotificationService {
     });
   }
 
-  public getAll(userId: number): Observable<any> {
-    return this.http.get(this.api + `get/all/${userId}`);
+  public getAll(userId: number, params: string): Observable<any> {
+    return this.http.get(this.api + `get/all/${userId}?${params}`);
   }
 
   public countNew(userId: number): Observable<any> {

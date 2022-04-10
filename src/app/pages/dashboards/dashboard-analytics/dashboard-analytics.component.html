@@ -25,7 +25,7 @@
             iconClass="text-orange bg-orange-light"
             gdColumn.lt-sm="1"
             label="Heart Rate"
-            value="{{lastIndicator?.heartRate}} pt."></vex-widget-quick-value-center>
+            value="{{lastIndicator?.heartRate}} bpm"></vex-widget-quick-value-center>
 
     <vex-widget-quick-value-center
             [icon]="iconPressure"
@@ -38,7 +38,7 @@
             iconClass="text-deep-orange bg-deep-orange-light"
             gdColumn.lt-sm="1"
             label="Blood Oxygen"
-            value="{{lastIndicator?.bloodOxygen}} gg"></vex-widget-quick-value-center>
+            value="{{lastIndicator?.bloodOxygen}}%"></vex-widget-quick-value-center>
 
 </div>
 <div fxLayout="row"
@@ -82,27 +82,27 @@
 
         <ng-container matColumnDef="upperBloodPressure">
             <th mat-header-cell *matHeaderCellDef>Upper Blood Pressure</th>
-            <td mat-cell *matCellDef="let element"> {{element.upperBloodPressure}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.upperBloodPressure}} mmHg </td>
         </ng-container>
 
         <ng-container matColumnDef="lowerBloodPressure">
             <th mat-header-cell *matHeaderCellDef>Lower Blood Pressure</th>
-            <td mat-cell *matCellDef="let element"> {{element.lowerBloodPressure}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.lowerBloodPressure}} mmHg </td>
         </ng-container>
 
         <ng-container matColumnDef="bloodOxygen">
-            <th mat-header-cell *matHeaderCellDef> Heart Rate</th>
-            <td mat-cell *matCellDef="let element"> {{element.bloodOxygen}} </td>
+            <th mat-header-cell *matHeaderCellDef> Blood Oxygen</th>
+            <td mat-cell *matCellDef="let element"> {{element.bloodOxygen}}% </td>
         </ng-container>
 
         <ng-container matColumnDef="heartRate">
-            <th mat-header-cell *matHeaderCellDef> Temperature</th>
-            <td mat-cell *matCellDef="let element"> {{element.heartRate}} </td>
+            <th mat-header-cell *matHeaderCellDef> Heart Rate</th>
+            <td mat-cell *matCellDef="let element"> {{element.heartRate}} bpm</td>
         </ng-container>
 
         <ng-container matColumnDef="temperature">
             <th mat-header-cell *matHeaderCellDef> Temperature</th>
-            <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.temperature}}°C </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

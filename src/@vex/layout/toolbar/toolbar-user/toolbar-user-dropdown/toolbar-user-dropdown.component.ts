@@ -109,7 +109,6 @@ export class ToolbarUserDropdownComponent implements OnInit {
   }
 
   close() {
-    this.authService.logout();
     this.popoverRef.close();
   }
 

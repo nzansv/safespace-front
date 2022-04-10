@@ -18,6 +18,7 @@ import { getAllParams } from '../../../../../@vex/utils/check-router-childs-data
 import {NotificationService} from '../services/notification.service';
 import {BehaviorSubject} from 'rxjs';
 import {Notification} from '../interfaces/notification.interface';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'vex-mail-list',
@@ -32,7 +33,6 @@ export class MailListComponent implements OnInit {
 
   mails$ = this.mailService.filteredMails$;
   gtSm$ = this.layoutService.gtSm$;
-  // notifications: Notification[];
   notifications;
   notifications$;
 
@@ -49,6 +49,12 @@ export class MailListComponent implements OnInit {
   icLabel = icLabel;
   icSettings = icSettings;
 
+  currentUser;
+
+  pageSize = 10;
+  pageIndex = 0;
+  pageLength = 0;
+
   trackById = trackById;
 
   selection = new SelectionModel<Notification['id']>(true, []);
@@ -60,13 +66,31 @@ export class MailListComponent implements OnInit {
 
   ngOnInit(): void {
     if (JSON.parse(localStorage.getItem('currentUser'))) {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-      this.notificationService.getAll(currentUser.id).subscribe(val => {
-        this.notifications = new BehaviorSubject(val);
-        this.notifications$ = this.notifications.asObservable();
-      });
+      this.getAllNotifications();
     }
+  }
+
+  getAllNotifications(event?: PageEvent) {
+    let param = '';
+    if (event) {
+      param = `page=${event.pageIndex}&size=${event.pageSize}`;
+    } else {
+      // this.pageLength = 0;
+      // this.pageIndex = 0;
+      // this.pageSize = 10;
+      param = `page=${this.pageIndex}&size=${this.pageSize}`;
+    }
+    this.notificationService.getAll(this.currentUser.id, param).subscribe(res => {
+      this.notifications = new BehaviorSubject(res.content);
+      this.notifications$ = this.notifications.asObservable();
+
+      this.notifications = res.content;
+      this.pageIndex = res.pageNumber;
+      this.pageSize = res.pageSize;
+      this.pageLength = res.totalElements;
+    });
   }
 
   masterToggle(notes: Notification[] | null, change: MatCheckboxChange) {
