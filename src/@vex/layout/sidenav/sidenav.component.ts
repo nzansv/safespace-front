@@ -73,10 +73,21 @@ export class SidenavComponent implements OnInit {
             routerLinkActiveOptions: {exact: true}
           },
           {
-            type: 'link',
-            label: 'All Employes',
-            route: '/apps/aio-table',
-            icon: icAssigment
+            type: 'dropdown',
+            label: 'Employees',
+            icon: icAssigment,
+            children: [
+              {
+                type: 'link',
+                label: 'Create Employee',
+                route: '/apps/aio-table/create-employee'
+              },
+              {
+                type: 'link',
+                label: 'Employee list',
+                route: '/apps/aio-table/employee-list'
+              }
+            ]
           },
           {
             type: 'link',

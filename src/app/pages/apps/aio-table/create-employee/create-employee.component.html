@@ -1,0 +1,54 @@
+<div class="max-w-full flex-auto sm:ltr:ml-6 sm:rtl:mr-6">
+    <div class="p-gutter" vexContainer>
+
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div class="card" fxFlex="auto">
+                <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+                    <h2 class="title m-0">Create new employee</h2>
+                </div>
+
+                <div class="px-6 py-4" fxLayout="column">
+                    <form [formGroup]="createUserForm" (ngSubmit)="submit()">
+                        <div fxLayout="column" class="px-6 py-4">
+                            <mat-form-field>
+                                <mat-label>Username</mat-label>
+                                <input matInput required formControlName="username">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Password</mat-label>
+                                <input [type]="inputType" matInput required formControlName="password">
+                                <button (click)="togglePassword()" mat-icon-button matSuffix type="button">
+                                    <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+                                    <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+                                </button>
+                                <mat-hint>Try clicking the eye to toggle the visibility.</mat-hint>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Role</mat-label>
+                                <mat-select required formControlName="role">
+                                    <mat-option value="Admin">Admin</mat-option>
+                                    <mat-option value="Doctor">Doctor</mat-option>
+                                    <mat-option value="Employee">Employee</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Department</mat-label>
+                                <mat-select required formControlName="departmentId">
+                                    <mat-option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+<!--                                <button mat-button type="button">CANCEL</button>-->
+                                <button color="primary" mat-raised-button type="submit" [disabled]="createUserForm.invalid">SUBMIT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

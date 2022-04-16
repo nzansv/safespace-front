@@ -7,7 +7,6 @@ import {AioTableRoutingModule} from '../aio-table/aio-table-routing.module';
 import {PageLayoutModule} from '../../../../@vex/components/page-layout/page-layout.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BreadcrumbsModule} from '../../../../@vex/components/breadcrumbs/breadcrumbs.module';
-import {CustomerCreateUpdateModule} from '../aio-table/customer-create-update/customer-create-update.module';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
@@ -25,6 +24,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-task-dialog.component';
 
 
@@ -40,7 +40,6 @@ import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-t
     PageLayoutModule,
     FlexLayoutModule,
     BreadcrumbsModule,
-    CustomerCreateUpdateModule,
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
@@ -51,6 +50,7 @@ import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-t
     MatMenuModule,
     MatInputModule,
     IconModule,
+    MatDialogModule,
     FormsModule,
     MatTooltipModule,
     ReactiveFormsModule,
@@ -61,6 +61,8 @@ import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-t
   ],
   providers: [
     DatePipe,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class TaskModule { }

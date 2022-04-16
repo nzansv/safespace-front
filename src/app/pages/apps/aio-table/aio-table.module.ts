@@ -6,7 +6,6 @@ import { AioTableComponent } from './aio-table.component';
 import { PageLayoutModule } from '../../../../@vex/components/page-layout/page-layout.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BreadcrumbsModule } from '../../../../@vex/components/breadcrumbs/breadcrumbs.module';
-import { CustomerCreateUpdateModule } from './customer-create-update/customer-create-update.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -35,27 +34,33 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {CalendarModule} from '../calendar/calendar.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDividerModule} from '@angular/material/divider';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import {FormElementsRoutingModule} from '../../ui/forms/form-elements/form-elements-routing.module';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
-  declarations: [AioTableComponent, EmpDashboardComponent],
+  declarations: [AioTableComponent, EmpDashboardComponent, CreateEmployeeComponent],
   imports: [
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     CommonModule,
     AioTableRoutingModule,
     PageLayoutModule,
-    FlexLayoutModule,
-    BreadcrumbsModule,
-    CustomerCreateUpdateModule,
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
     MatMenuModule,
-    IconModule,
-    FormsModule,
     MatTooltipModule,
-    ReactiveFormsModule,
-    ContainerModule,
     MatSelectModule,
     MatButtonToggleModule,
     FlexLayoutModule,
@@ -69,19 +74,24 @@ import {MatInputModule} from '@angular/material/input';
     WidgetAssistantModule,
     WidgetLargeChartModule,
     WidgetTableModule,
-    MatTableModule,
     SecondaryToolbarModule,
     BreadcrumbsModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
-    PageLayoutModule,
     ContainerModule,
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatDialogModule,
+    MatInputModule,
+    MatRadioModule,
+    MatDividerModule
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class AioTableModule {

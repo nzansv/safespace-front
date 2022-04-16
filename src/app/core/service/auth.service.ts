@@ -15,9 +15,10 @@ export class AuthService {
     currentUser = this.currentUserSubject.asObservable();
 
     constructor(private http: HttpClient) {
-        // this.currentUserSubject = new BehaviorSubject<UserDto>(
-        //     JSON.parse(localStorage.getItem('currentUser'))
-        // );
+    }
+
+    createUser(createRequest: any): Observable<any> {
+        return this.http.post(`/create-user`, createRequest, { responseType: 'text'});
     }
 
     login(username: string, password: string): Observable<any>{

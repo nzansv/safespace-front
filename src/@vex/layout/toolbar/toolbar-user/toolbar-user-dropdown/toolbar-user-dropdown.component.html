@@ -4,7 +4,7 @@
       <div class="dropdown-heading-icon" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon [icIcon]="icPerson"></mat-icon>
       </div>
-      <div class="dropdown-heading">{{user.firstName}} {{user.lastName}}</div>
+      <div class="dropdown-heading">{{user?.firstName}} {{user?.lastName}}</div>
     </div>
   </div>
 
@@ -21,8 +21,8 @@
                 class="notification-icon"
                 fxFlex="none"></mat-icon>
       <div fxFlex="auto">
-        <div class="notification-label">{{ item.label }}</div>
-        <div class="notification-description">{{ item.description }}</div>
+        <div class="notification-label">{{ item?.label }}</div>
+        <div class="notification-description">{{ item?.description }}</div>
       </div>
       <mat-icon [icIcon]="icChevronRight" class="notification-chevron" fxFlex="none"></mat-icon>
     </a>
