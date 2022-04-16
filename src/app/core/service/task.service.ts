@@ -14,7 +14,7 @@ export class TaskService {
   getAllTasks(params): Observable<any>{
     return this.http.get(`${this.GENERAL}/all?${params}`);
   }
-  createTask(task): Observable<any> {
+  createOrUpdateTask(task): Observable<any> {
     return this.http.post(this.GENERAL, task);
   }
 }

@@ -22,7 +22,7 @@ interface Food {
 export class CreateTaskComponent implements OnInit, OnDestroy {
   currentUser: any;
   users: User[];
-  /** control for the selected bank for server side filtering */
+  /** control for the selected users for server side filtering */
   public usersServerSideCtrl: FormControl = new FormControl();
 
   /** control for filter for server side. */
@@ -31,13 +31,11 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
   /** indicate search operation is in progress */
   public searching = false;
 
-  /** list of banks filtered after simulating server side search */
+  /** list of users filtered after simulating server side search */
   public  filteredServerSideUsers: ReplaySubject<User[]> = new ReplaySubject<User[]>(1);
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
-
-
 
   task: Task = {
     employeeId: null,
@@ -69,7 +67,7 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.taskForm.controls.employeeId.setValue(this.usersServerSideCtrl.value?.userId);
-    this.taskService.createTask(this.taskForm.getRawValue()).subscribe(res => {
+    this.taskService.createOrUpdateTask(this.taskForm.getRawValue()).subscribe(res => {
     });
   }
   getAllUsers(){

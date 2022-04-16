@@ -11,6 +11,10 @@ import { FormControl } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import {UserService} from '../../../../core/service/user.service';
 import {TaskService} from '../../../../core/service/task.service';
+import icDelete from '@iconify/icons-ic/twotone-delete';
+import {User} from '../../../../core/model/user';
+import {EmpDashboardComponent} from '../../aio-table/emp-dashboard/emp-dashboard.component';
+import {ViewEditTaskDialogComponent} from '../view-edit-task-dialog/view-edit-task-dialog.component';
 
 
 @UntilDestroy()
@@ -44,6 +48,8 @@ export class TaskListComponent implements OnInit{
   labels = aioTableLabels;
 
   icFolder = icFolder;
+  icDelete = icDelete;
+
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -55,6 +61,13 @@ export class TaskListComponent implements OnInit{
 
   ngOnInit() {
     this.getAllTasksContent();
+  }
+
+  openTask(userId?: User['userId']) {
+    this.dialog.open(ViewEditTaskDialogComponent, {
+      data: userId || null,
+      width: '1200px'
+    });
   }
 
   getAllTasksContent(event?: PageEvent) {

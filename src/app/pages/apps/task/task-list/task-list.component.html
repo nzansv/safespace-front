@@ -58,9 +58,9 @@
                 <ng-container matColumnDef="actions">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header></th>
                     <td *matCellDef="let row" class="w-10 text-secondary" mat-cell>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="openTask(row)">
                             <mat-icon [icIcon]="icFolder"></mat-icon>
-                            <span>View Dashboard</span>
+                            <span>View Information</span>
                         </button>
                     </td>
                 </ng-container>

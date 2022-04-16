@@ -25,12 +25,14 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-task-dialog.component';
 
 
 @NgModule({
   declarations: [
     TaskListComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    ViewEditTaskDialogComponent
   ],
   imports: [
     CommonModule,

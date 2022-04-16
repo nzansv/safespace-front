@@ -1,0 +1,23 @@
+<div class="mt-6 flex flex-col md:flex-row md:items-start">
+    <div class="flex-auto" style="text-align: center">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign=" center">
+                <h1 class="title m-0">View Task</h1>
+            </div>
+            <div class="px-6 pt-4 pb-0" fxLayout="column">
+
+                <mat-form-field appearance="standard" class="vex-flex-form-field" color="accent">
+                    <mat-label>Complaint</mat-label>
+                    <textarea  [(ngModel)]="task.complaints" value="{{task.complaints}}" matInput placeholder="Complaint"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard" class="vex-flex-form-field" color="warn">
+                    <mat-label>Recommendation</mat-label>
+                    <textarea [(ngModel)]="task.recommendations" value="{{task.recommendations}}"  matInput placeholder="Recommendation"></textarea>
+
+                </mat-form-field>
+            </div>
+            <button (click)="updateTask()" color="primary" mat-raised-button style="margin: 10px">
+                Submit
+            </button>
+    </div>
+</div>
