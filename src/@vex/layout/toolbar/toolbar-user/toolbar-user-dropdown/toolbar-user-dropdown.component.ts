@@ -94,10 +94,12 @@ export class ToolbarUserDropdownComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef,
               private userService: UserService,
               private popoverRef: PopoverRef<ToolbarUserDropdownComponent>,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+    this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
+
+  }
 
   ngOnInit() {
-    this.userDTO = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.getUserDetailsById(this.userDTO.id).subscribe(res => {
       this.user = res;
     });

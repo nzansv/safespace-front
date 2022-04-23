@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import {UserDto} from '../model/UserDto';
+import {ChangePasswordRequest} from '../model/changePasswordRequest';
 
 
 @Injectable({
@@ -50,5 +51,9 @@ export class AuthService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         return of({success: false});
+    }
+
+    changePassword(requestBody: ChangePasswordRequest): Observable<any> {
+        return this.http.post('/change-password', requestBody, { responseType: 'text'});
     }
 }

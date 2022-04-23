@@ -21,6 +21,10 @@ const routes: VexRoutes = [
       {
         path: 'timeline',
         loadChildren: () => import('./social-timeline/social-timeline.module').then(m => m.SocialTimelineModule)
+      },
+      {
+        path: 'change-password',
+        loadChildren: () => import('./social-change-password/social-change-password.module').then(m => m.SocialChangePasswordModule)
       }
     ]
   }

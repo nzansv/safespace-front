@@ -34,6 +34,10 @@ export class SocialComponent implements OnInit {
     {
       label: 'EDIT',
       route: './timeline'
+    },
+    {
+      label: 'CHANGE PASSWORD',
+      route: './change-password'
     }
   ];
 
