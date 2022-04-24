@@ -18,6 +18,10 @@ const routes: VexRoutes = [
       {
         path: 'create-task',
         component: CreateTaskComponent
+      },
+      {
+        path: 'create-task/:userId',
+        component: CreateTaskComponent
       }
     ]
   }

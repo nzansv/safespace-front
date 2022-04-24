@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { aioTableData, aioTableLabels } from '../../../../static-data/aio-table-data';
 import icFolder from '@iconify/icons-ic/twotone-folder';
+import icSearch from '@iconify/icons-ic/twotone-search';
+import icAdd from '@iconify/icons-ic/twotone-add';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 import { stagger40ms } from '../../../../@vex/animations/stagger.animation';
@@ -16,6 +18,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {UserService} from '../../../core/service/user.service';
 import {User} from '../../../core/model/user';
 import {EmpDashboardComponent} from './emp-dashboard/emp-dashboard.component';
+import {Router} from '@angular/router';
 
 
 @UntilDestroy()
@@ -46,15 +49,21 @@ export class AioTableComponent implements OnInit{
   pageLength = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   users: any[];
+  searchUser: string;
+  currentUser: any;
 
   labels = aioTableLabels;
 
   icFolder = icFolder;
+  icSearch = icSearch;
+  icAdd = icAdd;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog, private userService: UserService) {
+  constructor(private dialog: MatDialog, private userService: UserService,
+              private route: Router) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   ngOnInit() {
     this.getAllUsersContent();
@@ -77,11 +86,27 @@ export class AioTableComponent implements OnInit{
       this.pageSize = 5;
       param = `page=${this.pageIndex}&size=${this.pageSize}`;
     }
+
+    if (this.searchUser) {
+      param += '&search=' + this.searchUser;
+    }
     this.userService.getUsersByPagination(param).subscribe(res => {
       this.users = res.content;
       this.pageIndex = res.pageNumber;
       this.pageSize = res.pageSize;
       this.pageLength = res.totalElements;
     });
+  }
+
+  searchUsers() {
+    // if (this.searchUser.trim()) {
+      this.searchUser = this.searchUser.trim().replace(' ', '');
+      this.getAllUsersContent();
+    // }
+  }
+
+  addTask(userId: any) {
+    console.log(userId);
+    this.route.navigateByUrl('apps/task/create-task/' + userId);
   }
 }

@@ -26,6 +26,7 @@ import {MatInputModule} from '@angular/material/input';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-task-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ViewEditTaskDialogComponent } from './view-edit-task-dialog/view-edit-t
     ContainerModule,
     NgxMatSelectSearchModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSnackBarModule
   ],
   providers: [
     DatePipe,

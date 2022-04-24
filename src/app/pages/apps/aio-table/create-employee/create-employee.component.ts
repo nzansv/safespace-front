@@ -38,7 +38,7 @@ export class CreateEmployeeComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef,
               private departmentService: DepartmentService,
               private authService: AuthService,
-              private snackBar: MatSnackBar,) {
+              private snackBar: MatSnackBar) {
     this.createUserForm = new FormGroup({
 
       username: new FormControl('', Validators.required),
