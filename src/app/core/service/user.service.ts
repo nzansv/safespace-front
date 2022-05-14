@@ -29,4 +29,9 @@ export class UserService {
     return this.http.put(`${this.GENERAL_USER_DETAIL}/createUpdate`, user);
   }
 
+  deactivateUser(userId): Observable<any> {
+    return this.http.get(`${this.GENERAL}/deactivate/${userId}`, {observe: 'response',
+    responseType: 'text'});
+  }
+
 }

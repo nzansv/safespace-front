@@ -16,16 +16,20 @@ export class ViewEditTaskDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public task: Task,
               private fb: FormBuilder,
               private taskService: TaskService,
+              private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<ViewEditTaskDialogComponent>,
               ) { }
 
   ngOnInit(): void {
-    console.log(this.task);
   }
 
   updateTask() {
-    console.log(this.task)
+    console.log(this.task);
     this.taskService.createOrUpdateTask(this.task).subscribe(v => {
-      console.log('ok');
+      this.dialogRef.close();
+      this.snackBar.open('The task successfully updated!', 'Close', {
+        duration: 3000
+      });
     });
   }
 }

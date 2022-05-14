@@ -13,9 +13,13 @@ import {ChangePasswordRequest} from '../model/changePasswordRequest';
 export class AuthService {
 
     private currentUserSubject = new BehaviorSubject<UserDto>(null);
-    currentUser = this.currentUserSubject.asObservable();
+    _currentUser = this.currentUserSubject.asObservable();
 
     constructor(private http: HttpClient) {
+    }
+
+    setCurrentUser(user: any) {
+        this.currentUserSubject.next(user);
     }
 
     createUser(createRequest: any): Observable<any> {

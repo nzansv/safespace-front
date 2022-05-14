@@ -43,10 +43,11 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 @NgModule({
-  declarations: [AioTableComponent, EmpDashboardComponent, CreateEmployeeComponent],
+  declarations: [AioTableComponent, EmpDashboardComponent, CreateEmployeeComponent, DeleteDialogComponent],
   imports: [
     MatNativeDateModule,
     MatAutocompleteModule,

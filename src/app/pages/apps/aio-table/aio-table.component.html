@@ -117,6 +117,10 @@
               (click)="addTask(row.userId)">
                   <mat-icon [icIcon]="icAdd"></mat-icon>
               </button>
+              <button *ngIf="currentUser.role == 'Admin'" matTooltip="Delete user" mat-icon-button
+              (click)="deleteUser(row.userId)">
+                  <mat-icon [icIcon]="icTrash"></mat-icon>
+              </button>
           </td>
         </ng-container>
 

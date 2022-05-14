@@ -19,26 +19,27 @@
             iconClass="text-primary bg-primary-light"
             gdColumn.lt-sm="1"
             label="Temperature"
-            value="{{lastIndicator?.temperature}}°C"></vex-widget-quick-value-center>
+            value="{{lastIndicator && lastIndicator.temperature ? (lastIndicator.temperature + ' °C') : ''}}"></vex-widget-quick-value-center>
     <vex-widget-quick-value-center
             [icon]="iconHeartRate"
             iconClass="text-orange bg-orange-light"
             gdColumn.lt-sm="1"
             label="Heart Rate"
-            value="{{lastIndicator?.heartRate}} bpm"></vex-widget-quick-value-center>
+            value="{{lastIndicator && lastIndicator.heartRate ? (lastIndicator.heartRate + ' bpm') : ''}}"></vex-widget-quick-value-center>
 
     <vex-widget-quick-value-center
             [icon]="iconPressure"
             iconClass="text-deep-orange bg-deep-orange-light"
             gdColumn.lt-sm="1"
             label="Blood Pressure"
-            value="{{lastIndicator?.upperBloodPressure}}/{{lastIndicator?.lowerBloodPressure}} mmHg"></vex-widget-quick-value-center>
+            value="{{lastIndicator && lastIndicator.upperBloodPressure && lastIndicator.lowerBloodPressure
+            ? (lastIndicator.upperBloodPressure + '/' + lastIndicator.lowerBloodPressure +  ' mmHg') : ''}}"></vex-widget-quick-value-center>
     <vex-widget-quick-value-center
             [icon]="iconOxygen"
             iconClass="text-deep-orange bg-deep-orange-light"
             gdColumn.lt-sm="1"
             label="Blood Oxygen"
-            value="{{lastIndicator?.bloodOxygen}}%"></vex-widget-quick-value-center>
+            value="{{lastIndicator && lastIndicator.bloodOxygen ? (lastIndicator.bloodOxygen + '%') : ''}}"></vex-widget-quick-value-center>
 
 </div>
 <div fxLayout="row"

@@ -51,19 +51,23 @@ export class SidenavComponent implements OnInit {
   trackByRoute = trackByRoute;
   icRadioButtonChecked = icRadioButtonChecked;
   icRadioButtonUnchecked = icRadioButtonUnchecked;
+  currentUser;
 
   constructor(private navigationService: NavigationService,
               private layoutService: LayoutService,
               private configService: ConfigService,
               private notificationService: NotificationService,
               private authService: AuthService) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  ngOnInit() {
     this.notificationService.countNotes$.subscribe(v => {
       this.c = v;
       console.log(this.c);
 
       this.c = v > 0 ? v : null;
-      if (currentUser.role === 'Admin') {
+      if (this.currentUser.role === 'Admin') {
         this.items = [
           {
             type: 'link',
@@ -642,7 +646,7 @@ export class SidenavComponent implements OnInit {
           //   icon: icSettings
           // }
         ];
-      } else if (currentUser.role === 'User') {
+      } else if (this.currentUser.role === 'User') {
         this.items = [
           {
             type: 'link',
@@ -669,7 +673,7 @@ export class SidenavComponent implements OnInit {
             },
           }
         ];
-      } else if (currentUser.role === 'Doctor') {
+      } else if (this.currentUser.role === 'Doctor') {
         this.items = [
           {
             type: 'link',
@@ -727,9 +731,6 @@ export class SidenavComponent implements OnInit {
         ];
       }
     });
-  }
-
-  ngOnInit() {
   }
 
   onMouseEnter() {

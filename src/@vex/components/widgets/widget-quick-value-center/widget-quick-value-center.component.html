@@ -1,6 +1,7 @@
 <div (mouseenter)="showButton = true"
      (mouseleave)="showButton = false"
      class="card p-1 relative hover:shadow-16 trans-shadow"
+     [ngClass]="!value ? 'pt-5' : 'pt-3'"
      fxLayout="column"
      fxLayoutAlign="start center">
   <div [ngClass]="iconClass" *ngIf="icon === 'thermometer'" class="rounded-full w-12 h-12 flex items-center justify-center">
@@ -16,8 +17,8 @@
     <span class="iconify" data-icon="healthicons:heart-cardiogram" data-width="30" data-height="30"></span>
   </div>
 
-  <h2 class="display-2 font-bold mt-4 mb-2">{{ value }}</h2>
-  <h3 class="subheading-2 font-medium text-secondary m-0">{{ label }}</h3>
+  <span class="display-2 font-bold mt-4 mb-2" style="font-size: 18px">{{ value }}</span>
+  <span class="subheading-2 font-medium text-secondary m-0 ">{{ label }}</span>
 
   <h4 [class.text-green]="change > 0"
       [class.text-red]="change <= 0"

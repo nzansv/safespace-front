@@ -10,6 +10,7 @@ import { aioTableData, aioTableLabels } from '../../../../static-data/aio-table-
 import icFolder from '@iconify/icons-ic/twotone-folder';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import icAdd from '@iconify/icons-ic/twotone-add';
+import icTrash from '@iconify/icons-ic/twotone-delete';
 import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 import { stagger40ms } from '../../../../@vex/animations/stagger.animation';
@@ -19,6 +20,8 @@ import {UserService} from '../../../core/service/user.service';
 import {User} from '../../../core/model/user';
 import {EmpDashboardComponent} from './emp-dashboard/emp-dashboard.component';
 import {Router} from '@angular/router';
+import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @UntilDestroy()
@@ -57,12 +60,15 @@ export class AioTableComponent implements OnInit{
   icFolder = icFolder;
   icSearch = icSearch;
   icAdd = icAdd;
+  icTrash = icTrash;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog, private userService: UserService,
-              private route: Router) {
+  constructor(private dialog: MatDialog,
+              private userService: UserService,
+              private route: Router,
+              private snackbar: MatSnackBar) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   ngOnInit() {
@@ -108,5 +114,27 @@ export class AioTableComponent implements OnInit{
   addTask(userId: any) {
     console.log(userId);
     this.route.navigateByUrl('apps/task/create-task/' + userId);
+  }
+
+  deleteUser(userId: any) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: userId,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'DELETED') {
+        this.snackbar.open('User deleted successfully!', '', {
+          duration: 2000,
+          horizontalPosition: 'center'
+        });
+        this.getAllUsersContent();
+      } else if (result === 'ERROR') {
+        this.snackbar.open('Something went wrong...', '', {
+          duration: 2000,
+          horizontalPosition: 'center'
+        });
+      }
+    });
   }
 }

@@ -34,11 +34,14 @@
 <!--        <mat-checkbox class="caption" color="primary">Remember Me</mat-checkbox>-->
 <!--        <a [routerLink]="['/forgot-password']" class="caption">Forgot Password?</a>-->
         <div *ngIf="showError">
-          <p class="text-secondary text-center mat-warn">please try again!</p>
+          <p class="text-secondary text-center mat-warn" style="color: red">Wrong username or password!</p>
         </div>
       </div>
 
-      <button (click)="send()" color="primary" mat-raised-button type="submit">
+      <button (click)="send()"
+              [disabled]="loading"
+              [class.spinner]="loading"
+              color="primary" mat-raised-button type="submit">
         SIGN IN
       </button>
 

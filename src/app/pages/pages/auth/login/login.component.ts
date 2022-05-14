@@ -33,6 +33,7 @@ import icSettings from '@iconify/icons-ic/twotone-settings';
 import {NotificationService} from '../../../apps/mail/services/notification.service';
 import {NavigationService} from '../../../../../@vex/services/navigation.service';
 import {LayoutService} from '../../../../../@vex/services/layout.service';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
     selector: 'vex-login',
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
 
     icVisibility = icVisibility;
     icVisibilityOff = icVisibilityOff;
+    loading = false;
 
     constructor(private router: Router,
                 private fb: FormBuilder,
@@ -82,6 +84,8 @@ export class LoginComponent implements OnInit {
             console.log(this.error);
             return;
         } else {
+            this.loading = true;
+            console.log(this.loading);
             this.authService.login(this.f.username.value, this.f.password.value)
                 .subscribe(res => {
                         if (res) {
@@ -97,11 +101,11 @@ export class LoginComponent implements OnInit {
                     },
                     err => {
                         if (err.status === 401) {
-                            this.showError = true;
                             this.error = 'Log in failed. Please try again!';
                         }
                     });
         }
+        // this.loading = false;
     }
 
     toggleVisibility() {
