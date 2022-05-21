@@ -13,14 +13,19 @@ import {Task} from '../../../../core/model/task';
 })
 export class ViewEditTaskDialogComponent implements OnInit {
 
+  currentUser;
+
   constructor(@Inject(MAT_DIALOG_DATA) public task: Task,
               private fb: FormBuilder,
               private taskService: TaskService,
               private snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<ViewEditTaskDialogComponent>,
-              ) { }
+              ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit(): void {
+    console.log(this.currentUser);
   }
 
   updateTask() {

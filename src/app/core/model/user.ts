@@ -6,7 +6,7 @@ export class User {
     position: string;
     riskStatus: string;
     covidStatus: string;
-    phoneNumber: number;
+    phoneNumber: string;
     dateOfBirth: number;
     userId: number;
 }

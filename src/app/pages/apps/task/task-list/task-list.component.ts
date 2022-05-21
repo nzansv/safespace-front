@@ -49,6 +49,7 @@ export class TaskListComponent implements OnInit{
 
   icFolder = icFolder;
   icDelete = icDelete;
+  currentUser;
 
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -57,6 +58,7 @@ export class TaskListComponent implements OnInit{
   constructor(private dialog: MatDialog,
               private taskService: TaskService,
               private userService: UserService) {
+    this.currentUser = localStorage.getItem('currentUser');
   }
 
   ngOnInit() {

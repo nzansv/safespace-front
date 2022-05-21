@@ -16,7 +16,7 @@
 
                 </mat-form-field>
             </div>
-            <button (click)="updateTask()" color="primary" mat-raised-button style="margin: 10px">
+            <button (click)="updateTask()" [disabled]="currentUser.role != 'Doctor'" color="primary" mat-raised-button style="margin: 10px">
                 Submit
             </button>
     </div>
